@@ -5,12 +5,10 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const PreloadWebpackPlugin = require("preload-webpack-plugin");
 const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
-const entry1 = path.resolve(__dirname, "./src/js/index.js");
-const entry2 = path.resolve(__dirname, "./src/js/music_effects.js");
-const entry3 = path.resolve(__dirname, "./src/js/store_functions.js");
-const entry4 = path.resolve(__dirname, "./src/js/video-animations.js");
-const entry5 = path.resolve(__dirname, "./src/js/main_page.js");
-const nodePath = path.resolve(__dirname, "./node_modules");
+const index = path.resolve(__dirname, "./src/js/index.js");
+const random = path.resolve(__dirname, "./src/js/random.js");
+const nodePath = path.resolve(__dirname, "node_modules");
+
 const webpack = require("webpack");
 
 module.exports = {
@@ -32,11 +30,8 @@ module.exports = {
     hints: false
   },
   entry: {
-    main: entry1,
-    music: entry2,
-    store: entry3,
-    video: entry4,
-    home: entry5
+    index,
+    random
   },
   output: {
     filename: "js/[name].bundle.js",
@@ -134,40 +129,22 @@ module.exports = {
       $: "jquery",
       jQuery: "jquery"
     }),
+    // new HtmlWebpackPlugin({
+    //   title: "Video Game Randomizer",
+    //   filename: "index.html",
+    //   template: "./src/static/html/index.html",
+    //   favicon: "./src/static/images/favicons/game.ico",
+    //   inject: "head",
+    //   chunks: ["index"],
+    //   minify: true
+    // }),
     new HtmlWebpackPlugin({
-      title: "Unofficial Playboi Carti",
-      filename: "index.html",
-      template: "./src/static/html/home.html",
-      // favicon: "./src/static/images/favicons/favicon.ico",
+      title: "Video Game Randomizer - Cover Art",
+      filename: "random.html",
+      template: "./src/static/html/random.html",
+      favicon: "./src/static/images/favicons/game.ico",
       inject: "head",
-      chunks: ["main", "home"],
-      minify: true
-    }),
-    new HtmlWebpackPlugin({
-      title: "Unofficial Playboi Carti",
-      filename: "music.html",
-      template: "./src/static/html/music.html",
-      // favicon: "./src/static/images/favicons/favicon.ico",
-      inject: "head",
-      chunks: ["main", "music"],
-      minify: false
-    }),
-    new HtmlWebpackPlugin({
-      title: "Unofficial Playboi Carti",
-      filename: "store.html",
-      template: "./src/static/html/store.html",
-      favicon: "./src/static/images/favicons/favicon.ico",
-      inject: "head",
-      chunks: ["main", "store"],
-      minify: true
-    }),
-    new HtmlWebpackPlugin({
-      title: "Unofficial Playboi Carti",
-      filename: "videos.html",
-      template: "./src/static/html/videos.html",
-      // favicon: "./src/static/images/favicons/favicon.ico",
-      inject: "head",
-      chunks: ["main", "video"],
+      chunks: ["random"],
       minify: true
     }),
     //Adds rel="preload" to fonts;
