@@ -21,12 +21,29 @@ section {
   max-width: 100%;
   height: 100%;
   min-height: fit-content;
-  //Apply if modal is on the screen
-  // filter: brightness(30%) blur(2px);
+  transition: filter 0.2s ease;
+  &.unfocus {
+    filter: brightness(30%) blur(2px);
+  }
 }
 
-.container{
-  margin:0;
+.cutoff {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  &--sm {
+    -webkit-line-clamp: 1;
+  }
+  &--md {
+    -webkit-line-clamp: 3;
+  }
+  &--lg {
+    -webkit-line-clamp: 4;
+  }
+}
+
+.modal {
+  margin: 0;
   background: inherit;
   overflow: hidden;
   background: #3f3f3f;
@@ -37,7 +54,7 @@ section {
   position: relative;
   color: white;
   position: fixed;
-  z-index: 5;
+  z-index: 0;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -48,42 +65,20 @@ section {
   padding: 1.5rem;
   font-size: 2rem;
   text-align: center;
-}
+  opacity: 0;
+  transition: opacity 0.2s ease, z-index 0.2s ease;
 
-.modal {
-  // margin:0;
-  // background: inherit;
-  // overflow: hidden;
-  // background: #3f3f3f;
-  // // height: 80%;
-  // min-height: fit-content;
-  // border-radius: 5px;
-  // width: 80%;
-  // position: relative;
-  // color: white;
-  // position: fixed;
-  // z-index: 5;
-  // top: 50%;
-  // left: 50%;
-  // transform: translate(-50%, -50%);
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
-  // flex-direction: column;
-  // padding: 1.5rem;
-  // font-size: 2rem;
-  // text-align: center;
-  // display:none;
-  // opacity:0;
-  transition: opacity 0.4s ease;
-  p,a {
-    font-size: 2.3rem;
+  p,
+  a {
+    font-size: 0.8rem;
   }
-  a{
+  a {
     text-decoration: none;
-    color:#26f3c0;
+    color: #26f3c0;
   }
-  h1,h2{
+  h1,
+  h2 {
+    font-size: 1.3rem;
     margin: 0.8rem 0;
   }
   &__contents {
@@ -99,22 +94,23 @@ section {
     flex: 1 1 100%;
   }
   &__image {
-    flex: 1 0 100%;
-    height:20rem;
-
+    flex: 1 1 100%;
+    height: 25rem;
+    width: 50%;
   }
-  .fade-in{
-    opacity:1;
+  &.fade-in {
+    opacity: 1;
+    z-index: 5;
   }
 
   img {
-    width:100%;
-    height:20rem;
-    object-fit: contain;
-
+    width: 100%;
+    // height: 25rem;
+    object-fit: fill;
+    max-height: 100%;
   }
 }
-.container:before {
+.modal:before {
   content: "";
   position: absolute;
   background: inherit;
@@ -151,16 +147,17 @@ section {
   // transform-style: preserve-3d;
   cursor: pointer;
   transition: box-shadow 0.5s ease-out;
+  outline:none;
 }
 
-.grid-item:hover {
+.grid-item:hover, .grid-item:focus {
   box-shadow: 5px 8px 21px 8px #3cdae2;
   z-index: 2;
+  outline:none;
 }
 .grid-item img {
   display: block;
   width: 100%;
-  // height:270px;
 }
 
 .first_page {
@@ -179,7 +176,7 @@ section {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index:6;
+  z-index: 6;
 }
 #lds-default div {
   position: absolute;
@@ -258,5 +255,113 @@ section {
   }
   50% {
     transform: scale(1.5);
+  }
+}
+
+// max-width when viewport is equal to or narrow than VAL
+// min-width when viewport is at least this much apply styles
+@media only screen and (min-width: 425px) {
+  .modal {
+    p {
+      margin: 0.5rem 0;
+    }
+    p,
+    a {
+      font-size: 1rem;
+    }
+    h1,
+    h2 {
+      margin: 0.4rem 0;
+    }
+
+    &__image {
+      flex: 1 1 100%;
+      // height: 25rem;
+      width: 40%;
+    }
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .modal {
+    padding: 0.5rem;
+    p,
+    a {
+      font-size: 0.9rem;
+    }
+    &__image {
+      flex: 1 1 100%;
+      width: 33%;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .modal {
+    width: 90%;
+    padding: 1.3rem;
+    &__time {
+      flex: 1 1 100%;
+      height: 20rem;
+    }
+    &__info {
+      flex: 1 1 100%;
+      height: 20rem;
+    }
+    &__image {
+      flex: 1 1 100%;
+      height: 15rem;
+      width: 50%;
+    }
+    &__contents {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-direction: row;
+      max-height: 17rem;
+      padding: 1rem;
+    }
+    p,
+    a {
+      font-size: 1rem;
+    }
+    &__image {
+      flex: 1 1 75%;
+    }
+  }
+}
+
+
+
+@media only screen and (min-width: 1024px) {
+  .grid-sizer,
+  .grid-item {
+    width: 25%;
+  }
+  .modal {
+   width:70%;
+    &__image {
+      flex: 1 1 60%;
+      height: 16rem;
+      width: 60%;
+    }
+    &__contents {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-direction: row;
+      max-height: 17rem;
+      padding: 1rem;
+    }
+    p,
+    a {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+@media only screen and (min-width: 1080px) {
+  .modal {
+    width:50%;
   }
 }
