@@ -330,9 +330,11 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   $("body").on("keyup", (e) => {
-    if (event.keyCode === 13) {
-      event.preventDefault();
+    if (e.keyCode === 13) {
+      e.preventDefault();
       document.activeElement.click();
+      console.log(document.getElementsByClassName("gameUrl")[0]);
+      document.getElementsByClassName("gameUrl")[0].focus();
     }
   });
 });
@@ -391,13 +393,14 @@ function appendImages(links) {
           <div class="modal__time">
             <p>Main Story: ${value.main_story || "N/A"}</p>
             <p>Completionist: ${value.completionist || "N/A"}</p>
+            <p class="cutoff cutoff--md">Summary: ${value.summary || "N/A"}</p>
           </div>
           <div class="modal__info">
             <p>Release Date: ${value.release_data}</p>
             <p class="cutoff cutoff--lg">Platforms: ${value.platforms}</p>
             <p>Average Score: ${value.rating || "N/A"} </p>
-            <p class="cutoff cutoff--md">Summary: ${value.summary || "N/A"}</p>
-            <a rel="noopener" target="_blank" href="${value.url}">Giant Bomb Page</a>
+        
+            <a class="gameUrl"  tabindex="0" rel="noopener" target="_blank" href="${value.url}">Giant Bomb Page</a>
           </div>
         </div>`);
           e.preventDefault();
