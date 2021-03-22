@@ -14,14 +14,21 @@ body {
 }
 body {
   background-color: #ececec;
+  max-width: 100vw;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%239269d4' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
 }
 main {
+  max-width: 100vw;
   height: 100%;
   overflow-x: hidden;
   font-family: "Press Start 2P", sans-serif, cursive;
 }
+.wrapper {
+  position: relative;
+  margin-top: auto;
+}
 section {
+  max-width: 100vw;
   width: 100%;
   height: 100%;
   display: flex;
@@ -35,6 +42,15 @@ section {
 }
 
 .slice {
+  opacity: 0;
+  &.fadeLeft {
+    animation: fadeAnim1 1s ease;
+    animation-fill-mode: forwards;
+  }
+  &.fadeRight {
+    animation: fadeAnim2 1s ease;
+    animation-fill-mode: forwards;
+  }
   padding: 10rem 20%;
   background: #5a80c5;
   color: white;
@@ -63,74 +79,152 @@ section {
 #hero {
   width: 100vw;
   min-width: 100vw;
+  max-width: 100vw;
   height: 100vh;
-  outline: 2px solid red;
-  display: flex;
   overflow: hidden;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
   img {
     position: absolute;
     width: 4rem;
     bottom: 1rem;
     height: 4rem;
   }
-  .treasure {
-    left: 30%;
-    transform: scaleX(-1);
-    z-index: -1;
-  }
   .simon {
-    left: 0;
+    bottom: 10vh;
+    left: -70vw;
     z-index: 1;
-    animation: walkLeft 7s ease;
+    animation: walkLeft;
+    animation-timing-function: ease;
+    animation-duration: 7s;
     animation-iteration-count: infinite;
   }
   .megaman {
-    left: 10%;
-    z-index: 2;
+    bottom: 1rem;
+    left: -70vw;
+    z-index: 0;
     width: 3.5rem;
-    left: 0;
     height: 3.5rem;
-    animation: walkLeft 10s ease;
+    animation: walkLeft;
+    animation-duration: 10s;
     animation-iteration-count: infinite;
     animation-delay: 4s;
+    animation-timing-function: ease;
+    top: 2vh;
   }
   .rayman {
-    bottom: 0.7rem;
-    right: 10%;
     z-index: 1;
-    right: -4rem;
-    animation: walkRight 7s ease;
+    right: -70vw;
+    animation: walkRight;
+    animation-timing-function: ease;
+    animation-duration: 7s;
     animation-iteration-count: infinite;
     animation-delay: 8s;
   }
   h1 {
-    margin: 2rem 0;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
   }
-  .sprites {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    position: relative;
-    img {
-      position: absolute;
-      width: 4rem;
-      bottom: 1rem;
-      height: 4rem;
-    }
+  h5 {
+    z-index: 3;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  img {
+    position: absolute;
+    width: 4rem;
+    bottom: 1rem;
+    height: 4rem;
   }
 }
 
 @keyframes walkLeft {
   to {
-    transform: translateX(110vw);
+    transform: translateX(120vw);
   }
 }
 
 @keyframes walkRight {
   to {
     transform: translateX(-120vw);
+  }
+}
+
+@keyframes fadeAnim1 {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeAnim2 {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media only screen and (min-width: 425px) {
+  #hero {
+    .simon,
+    .rayman {
+      animation-duration: 9s;
+    }
+    .megaman {
+      animation-duration: 12s;
+    }
+  }
+}
+
+
+
+@media only screen and (min-width: 600px) {
+  #hero {
+    .simon,
+    .rayman {
+      animation-duration: 13s;
+    }
+    .megaman {
+      animation-duration: 15s;
+    }
+  }
+}
+
+
+
+@media only screen and (min-width: 768px) {
+  #hero {
+    .simon,
+    .rayman {
+      animation-duration: 18s;
+    }
+    .megaman {
+      animation-duration: 20s;
+    }
+  }
+}
+
+
+@media only screen and (min-width: 1024px) {
+  #hero {
+    .simon,
+    .rayman {
+      animation-duration: 22s;
+    }
+    .megaman {
+      animation-duration: 24s;
+    }
   }
 }
