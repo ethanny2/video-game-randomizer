@@ -129,15 +129,15 @@ module.exports = {
       $: "jquery",
       jQuery: "jquery"
     }),
-    // new HtmlWebpackPlugin({
-    //   title: "Video Game Randomizer",
-    //   filename: "index.html",
-    //   template: "./src/static/html/index.html",
-    //   favicon: "./src/static/images/favicons/game.ico",
-    //   inject: "head",
-    //   chunks: ["index"],
-    //   minify: true
-    // }),
+    new HtmlWebpackPlugin({
+      title: "Video Game Randomizer",
+      filename: "index.html",
+      template: "./src/static/html/index.html",
+      favicon: "./src/static/images/favicons/game.ico",
+      inject: "head",
+      chunks: ["index"],
+      minify: true
+    }),
     new HtmlWebpackPlugin({
       title: "Video Game Randomizer - Cover Art",
       filename: "random.html",

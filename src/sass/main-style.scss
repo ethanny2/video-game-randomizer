@@ -1,0 +1,136 @@
+html {
+  box-sizing: border-box;
+}
+html,
+body {
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+body {
+  background-color: #ececec;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%239269d4' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
+}
+main {
+  height: 100%;
+  overflow-x: hidden;
+  font-family: "Press Start 2P", sans-serif, cursive;
+}
+section {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  p {
+    font-family: sans-serif, cursive;
+  }
+}
+
+.slice {
+  padding: 10rem 20%;
+  background: #5a80c5;
+  color: white;
+  font-family: sans-serif;
+  font-size: large;
+  h2 {
+    font-family: "Press Start 2P", sans-serif, cursive;
+  }
+  &1 {
+    clip-path: polygon(0 20%, 100% 0, 100% 80%, 0 100%);
+  }
+  &2 {
+    clip-path: polygon(0% 8%, 100% 25%, 100% 100%, 0% 83%);
+  }
+  a {
+    text-decoration: none;
+    color: #21f1bd;
+  }
+  ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: circle;
+  }
+}
+
+#hero {
+  width: 100vw;
+  min-width: 100vw;
+  height: 100vh;
+  outline: 2px solid red;
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  img {
+    position: absolute;
+    width: 4rem;
+    bottom: 1rem;
+    height: 4rem;
+  }
+  .treasure {
+    left: 30%;
+    transform: scaleX(-1);
+    z-index: -1;
+  }
+  .simon {
+    left: 0;
+    z-index: 1;
+    animation: walkLeft 7s ease;
+    animation-iteration-count: infinite;
+  }
+  .megaman {
+    left: 10%;
+    z-index: 2;
+    width: 3.5rem;
+    left: 0;
+    height: 3.5rem;
+    animation: walkLeft 10s ease;
+    animation-iteration-count: infinite;
+    animation-delay: 4s;
+  }
+  .rayman {
+    bottom: 0.7rem;
+    right: 10%;
+    z-index: 1;
+    right: -4rem;
+    animation: walkRight 7s ease;
+    animation-iteration-count: infinite;
+    animation-delay: 8s;
+  }
+  h1 {
+    margin: 2rem 0;
+  }
+  .sprites {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    position: relative;
+    img {
+      position: absolute;
+      width: 4rem;
+      bottom: 1rem;
+      height: 4rem;
+    }
+  }
+}
+
+@keyframes walkLeft {
+  to {
+    transform: translateX(110vw);
+  }
+}
+
+@keyframes walkRight {
+  to {
+    transform: translateX(-120vw);
+  }
+}

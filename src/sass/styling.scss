@@ -11,9 +11,16 @@ body {
   margin: 0;
   padding: 0;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  background-color: #ececec;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%239269d4' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
 }
 
+
 section {
+  text-align:center;
+  h1{
+    font-family: "Press Start 2P", sans-serif, cursive;
+  }
   width: 100%;
   // border: solid black 1px;
   display: table;
@@ -47,7 +54,6 @@ section {
   background: inherit;
   overflow: hidden;
   background: #3f3f3f;
-  // height: 80%;
   min-height: fit-content;
   border-radius: 5px;
   width: 80%;
@@ -67,7 +73,6 @@ section {
   text-align: center;
   opacity: 0;
   transition: opacity 0.2s ease, z-index 0.2s ease;
-
   p,
   a {
     font-size: 0.8rem;
@@ -95,7 +100,6 @@ section {
   }
   &__image {
     flex: 1 1 100%;
-    // height: 25rem;
     width: 50%;
   }
   &.fade-in {
@@ -105,7 +109,6 @@ section {
 
   img {
     width: 100%;
-    // height: 25rem;
     object-fit: fill;
     max-height: 100%;
   }
@@ -126,9 +129,7 @@ section {
 
 #grid {
   min-width: 100%;
-  // min-height: 100%;
   width: 100%;
-  // height: 100%;
 }
 
 /* clearfix */
@@ -144,16 +145,16 @@ section {
 
 .grid-item {
   float: left;
-  // transform-style: preserve-3d;
   cursor: pointer;
   transition: box-shadow 0.5s ease-out;
-  outline:none;
+  outline: none;
 }
 
-.grid-item:hover, .grid-item:focus {
+.grid-item:hover,
+.grid-item:focus {
   box-shadow: 5px 8px 21px 8px #3cdae2;
   z-index: 2;
-  outline:none;
+  outline: none;
 }
 .grid-item img {
   display: block;
@@ -162,7 +163,6 @@ section {
 
 .first_page {
   height: 100%;
-  // border: solid black 1px;
   top: 0px;
   left: 0px;
 }
@@ -258,8 +258,6 @@ section {
   }
 }
 
-// max-width when viewport is equal to or narrow than VAL
-// min-width when viewport is at least this much apply styles
 @media only screen and (min-width: 425px) {
   .modal {
     p {
@@ -276,7 +274,6 @@ section {
 
     &__image {
       flex: 1 1 100%;
-      // height: 25rem;
       width: 40%;
     }
   }
@@ -301,22 +298,19 @@ section {
     h1,
     h2 {
       margin: 0.4rem 0;
-      margin-bottom:1.2rem;
+      margin-bottom: 1.2rem;
     }
     width: 90%;
     padding: 1.3rem;
     &__time {
       flex: 1 1 100%;
-      // height: 20rem;
       margin: 0 0.4rem;
     }
     &__info {
       flex: 1 1 100%;
-      // height: 20rem;
     }
     &__image {
       flex: 1 1 100%;
-      // height: 15rem;
       width: 50%;
     }
     &__contents {
@@ -337,18 +331,15 @@ section {
   }
 }
 
-
-
 @media only screen and (min-width: 1024px) {
   .grid-sizer,
   .grid-item {
     width: 25%;
   }
   .modal {
-   width:70%;
+    width: 70%;
     &__image {
       flex: 1 1 60%;
-      // height: 16rem;
       width: 60%;
     }
     &__contents {
@@ -368,6 +359,6 @@ section {
 
 @media only screen and (min-width: 1080px) {
   .modal {
-    width:50%;
+    width: 50%;
   }
 }

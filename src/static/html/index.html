@@ -1,625 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<!-- <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-		<script>
- 		 (adsbygoogle = window.adsbygoogle || []).push({
-  		  google_ad_client: "ca-pub-3946389022010821",
-  		  enable_page_level_ads: true
-  		  });
-		</script> -->
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<meta name="description" content="Choose a variety of filters and get a random video game.
-	Comprehenisve data with over 50,000 games to be selected.">
-	<meta name="keywords" content="random,games,generator,lottery,roulette,free,filter,metacritic,htlb.com">
-	<meta name="authors" content="Ethan">
-	<meta name="content-language" content="en">
-	<meta name="viewport" content="width=device-width" />
-
-
-	<title>Video Game Randomizer | Random Game Picker w/ Download</title>
-	 <link rel="icon" href="../game.ico">
-	 <!-- testing -->
-	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css" rel="stylesheet" />
-
-   
- 
-	<link rel="stylesheet" href="../css/second_page_styling.css">
-	<link rel="stylesheet" href="../css/animations.css">
-	<link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400italic' rel='stylesheet' type='text/css'>
-	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
-
-
-<!-- 	<script type="text/javascript" src="../javascript/side_navigation.js"></script>
- -->	<!--For progress bar loading etc.. -->
-	<script src="https://cdn.rawgit.com/kimmobrunfeldt/progressbar.js/0.5.6/dist/progressbar.js"></script>
-	<script type="text/javascript" src="../javascript/pace.js"></script>
-	<script src="https://use.fontawesome.com/0be685221f.js"></script>
-    <!-- <script src="https://npmcdn.com/masonry-layout@4.1/dist/masonry.pkgd.js"></script>
-	<script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.js"></script> -->
-	<link href="https://fonts.googleapis.com/css?family=Montserrat|Quicksand" rel="stylesheet">
-	<link href="../css/paceTheme.css" rel="stylesheet">
-	
-
-	<!--[if IE]>
-		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-</head>
-<body>
-			<!-- Creating a side navigation bar for the user selections so they do not have to keep switching pages. -->
-			<!-- %times; is AN X! --> 
-			<div id="mySidenav" class="sidenav">
-				  <a href="javascript:void(0)" class="close_button" onclick="closeNav()">&times;</a>
-				  <a href="javascript:void(0)" class="platform primary_menu">Platform</a>
-				  <a href="#" class="genre primary_menu">Genre</a>
-				  <a href="#" class="time_to_beat primary_menu">Time to Beat</a>
-				  <a href="#" class="rating primary_menu">Score</a>
-				  <a href="#" class="year primary_menu"> Original Release Year</a>
-				</div> 
-				<!-- Sub sections for the buttons and stuff.-->
-				<!-- The background is to make it transparent, but not the text inside.-->
-				<div class="subpage_background"></div>
-				<div class="platform subpage">
-						<header>Platforms</header>
-<!-- 						<button class="gen_button platform"> Generate</button>
- -->						<ul class="button_column platform">
- 						
- 						<button class="game_button" id="PC"> PC  </button>
-						<button class="game_button" id="Nintendo NX (working title)">Nintendo Switch</button>
-						<button class="game_button" id="Fuze Tomahawk F1">Fuze Tomahawk F1</button>
-						<button class="game_button" id="Apple TV">Apple TV</button>
-						<button class="game_button" id="New Nintendo 3DS">New Nintendo 3DS</button>
-						<button class="game_button" id="Amazon Fire TV">Amazon Fire TV</button>
-						<button class="game_button" id="Xbox One">Xbox One</button>
-						<button class="game_button" id="PlayStation 4">PlayStation 4</button>
-						<button class="game_button" id="Ouya">Ouya</button>
-						<button class="game_button" id="Wii U">Wii U</button>
-						<button class="game_button" id="PlayStation Vita">PlayStation Vita</button>
-						<button class="game_button" id="PlayStation Network (Vita)">PlayStation Network (Vita)</button>
-						<button class="game_button" id="Nintendo 3DS eShop">Nintendo 3DS eShop</button>
-						<button class="game_button" id="Nintendo 3DS">Nintendo 3DS</button>
-						<button class="game_button" id="Windows Phone">Windows Phone</button>
-						<button class="game_button" id="iPad">iPad</button>
-						<button class="game_button" id="Zeebo">Zeebo</button>
-						<button class="game_button" id="DSiWare">DSiWare</button>
-						<button class="game_button special" id="PlayStation Network (PSP)">PlayStation Network (PSP)</button>
-						<button class="game_button" id="Android">Android</button>
-						<button class="game_button" id="Leapfrog Didj">Leapfrog Didj</button>
-						<button class="game_button" id="iPhone">iPhone</button>
-						<button class="game_button" id="Wii Shop">Wii Shop</button>
-						<button class="game_button special" id="Wii">Wii</button>
-						<button class="game_button" id="PlayStation 3">PlayStation 3</button>
-						<button class="game_button" id="PlayStation Network (PS3)">PlayStation Network (PS3)</button>
-						<button class="game_button" id="HyperScan">HyperScan</button>
-						<button class="game_button" id="Xbox 360 Games Store">Xbox 360 Games Store</button>
-						<button class="game_button" id="Xbox 360">Xbox 360</button>
-						<button class="game_button" id="Gizmondo">Gizmondo</button>
-						<button class="game_button" id="Game Wave">Game Wave</button>
-						<button class="game_button" id="V.Smile">V.Smile</button>
-						<button class="game_button special" id="PlayStation Portable">PlayStation Portable</button>
-						<button class="game_button special" id="Nintendo DS">Nintendo DS</button>
-						<button class="game_button" id="XaviXPORT">XaviXPORT</button>
-						<button class="game_button" id="Leapster">Leapster</button>
-						<button class="game_button" id="Zodiac">Zodiac</button>
-						<button class="game_button special" id="N-Gage">N-Gage</button>
-						<button class="game_button special" id="Xbox">Xbox</button>
-						<button class="game_button" id="Pokémon mini">Pokémon mini</button>
-						<button class="game_button" id="GamePark 32">GamePark 32</button>
-						<button class="game_button" id="iPod">iPod</button>
-						<button class="game_button special" id="GameCube">GameCube</button>
-						<button class="game_button special" id="Game Boy Advance">Game Boy Advance</button>
-						<button class="game_button special" id="WonderSwan Color">WonderSwan Color</button>
-						<button class="game_button special" id="PlayStation 2">PlayStation 2</button>
-						<button class="game_button special" id="Nintendo 64DD">Nintendo 64DD</button>
-						<button class="game_button special" id="Neo Geo Pocket">Neo Geo Pocket</button>
-						<button class="game_button special" id="Neo Geo Pocket Color">Neo Geo Pocket Color</button>
-						<button class="game_button" id="NUON">NUON</button>
-						<button class="game_button special" id="WonderSwan">WonderSwan</button>
-						<button class="game_button special" id="Dreamcast">Dreamcast</button>
-						<button class="game_button special" id="Game Boy Color">Game Boy Color</button>
-						<button class="game_button" id="Game.Com">Game.Com</button>
-						<button class="game_button special" id="Nintendo 64">Nintendo 64</button>
-						<button class="game_button" id="Super A'Can">Super A'Can</button>
-						<button class="game_button" id="Casio Loopy">Casio Loopy</button>
-						<button class="game_button" id="Pippin">Pippin</button>
-						<button class="game_button special" id="Virtual Boy">Virtual Boy</button>
-						<button class="game_button" id="Satellaview">Satellaview</button>
-						<button class="game_button" id="R-Zone">R-Zone</button>
-						<button class="game_button special" id="Sega 32X">Sega 32X</button>
-						<button class="game_button special" id="PC-FX">PC-FX</button>
-						<button class="game_button special" id="PlayStation">PlayStation</button>
-						<button class="game_button special" id="Saturn">Saturn</button>
-						<button class="game_button special" id="Neo Geo CD">Neo Geo CD</button>
-						<button class="game_button special" id="Bandai Playdia">Bandai Playdia</button>
-						<button class="game_button" id="Sega Pico">Sega Pico</button>
-						<button class="game_button" id="Jaguar">Jaguar</button>
-						<button class="game_button special" id="Amiga CD32">Amiga CD32</button>
-						<button class="game_button special" id="3DO">3DO</button>
-						<button class="game_button" id="Pioneer LaserActive">Pioneer LaserActive</button>
-						<button class="game_button" id="Mega Duck">Mega Duck</button>
-						<button class="game_button" id="Memorex MD 2500 VIS">Memorex MD 2500 VIS</button>
-						<button class="game_button special" id="Sega CD">Sega CD</button>
-						<button class="game_button" id="Watara Supervision">Watara Supervision</button>
-						<button class="game_button special" id="CD-i">CD-i</button>
-						<button class="game_button" id="Linux">Linux</button>
-						<button class="game_button" id="Browser">Browser</button>
-						<button class="game_button special" id="Commodore CDTV">Commodore CDTV</button>
-						<button class="game_button" id="Game Master">Game Master</button>
-						<button class="game_button" id="Gamate">Gamate</button>
-						<button class="game_button special" id="Super Nintendo Entertainment System">SNES</button>
-						<button class="game_button special" id="Game Gear">Game Gear</button>
-						<button class="game_button special" id="Neo Geo">Neo Geo</button>
-						<button class="game_button" id="SAM Coupé">SAM Coupé</button>
-						<button class="game_button" id="SuperGrafx">SuperGrafx</button>
-						<button class="game_button special" id="Atari Lynx">Atari Lynx</button>
-						<button class="game_button special" id="Game Boy">Game Boy</button>
-						<button class="game_button" id="FM Towns">FM Towns</button>
-						<button class="game_button" id="View-Master Interactive Vision">View-Master Interactive...</button>
-						<button class="game_button special" id="TurboGrafx-CD">TurboGrafx-CD</button>
-						<button class="game_button special" id="Genesis">Genesis</button>
-						<button class="game_button special" id="TurboGrafx-16">TurboGrafx-16</button>
-						<button class="game_button special" id="Acorn Archimedes">Acorn Archimedes</button>
-						<button class="game_button special" id="Sharp X68000">Sharp X68000</button>
-						<button class="game_button" id="Action Max">Action Max</button>
-						<button class="game_button special" id="Apple IIgs">Apple IIgs</button>
-						<button class="game_button special" id="Atari 7800">Atari 7800</button>
-						<button class="game_button special" id="Sega Master System">Sega Master System</button>
-						<button class="game_button special" id="Amiga">Amiga </button>
-						</ul>
-					</div>
-				<div class="genre subpage">
-					<header>Genre</header>
-<!-- 					<button class="gen_button genre"> Generate</button>
- -->					<ul class="button_column genre">
- 							<button class="game_button" id="Action">Action</button>
-						<button class="game_button" id="Strategy">Strategy</button>
-						<button class="game_button" id="Shooter">Shooter</button>
-						<button class="game_button" id="Real-Time Strategy">Real-Time Strategy</button>
-						<button class="game_button" id="Card Game">Card Game</button>
-						<button class="game_button" id="Trivia/Board Game">Trivia/Board Game</button>
-						<button class="game_button" id="Compilation">Compilation</button>
-						<button class="game_button" id="MMORPG">MMORPG</button>
-						<button class="game_button" id="Minigame Collection">Minigame Collection</button>
-						<button class="game_button" id="Puzzle">Puzzle</button>
-						<button class="game_button" id="Music/Rhythm">Music/Rhythm</button>
-						<button class="game_button" id="Boxing">Boxing</button>
-						<button class="game_button" id="Sports">Sports</button>
-						<button class="game_button" id="Football">Football</button>
-						<button class="game_button" id="Basketball">Basketball</button>
-						<button class="game_button" id="Skateboarding">Skateboarding</button>
-						<button class="game_button" id="Flight Simulator">Flight Simulator</button>
-						<button class="game_button" id="Tennis">Tennis</button>
-						<button class="game_button" id="Billiards">Billiards</button>
-						<button class="game_button" id="Fishing">Fishing</button>
-						<button class="game_button" id="Golf">Golf</button>
-						<button class="game_button" id="Bowling">Bowling</button>
-						<button class="game_button" id="Pinball">Pinball</button>
-						<button class="game_button" id="Adventure">Adventure</button>
-						<button class="game_button" id="Dual-Joystick Shooter">Dual-Joystick Shooter</button>
-						<button class="game_button" id="First-Person Shooter">First-Person Shooter</button>
-						<button class="game_button" id="Snowboarding/Skiing">Snowboarding/Skiing</button>
-						<button class="game_button" id="Baseball">Baseball</button>
-						<button class="game_button" id="Light-Gun Shooter">Light-Gun Shooter</button>
-						<button class="game_button" id="Text Adventure">Text Adventure</button>
-						<button class="game_button" id="Brawler">Brawler</button>
-						<button class="game_button" id="Vehicular Combat">Vehicular Combat</button>
-						<button class="game_button" id="Hockey">Hockey</button>
-						<button class="game_button" id="Soccer">Soccer</button>
-						<button class="game_button" id="Role-Playing">Role-Playing</button>
-						<button class="game_button" id="Platformer">Platformer</button>
-						<button class="game_button" id="Track &amp; Field">Track &amp; Field</button>
-						<button class="game_button" id="Action-Adventure">Action-Adventure</button>
-						<button class="game_button" id="Fitness">Fitness</button>
-						<button class="game_button" id="Block-Breaking">Block-Breaking</button>
-						<button class="game_button" id="Cricket">Cricket</button>
-						<button class="game_button" id="Surfing">Surfing</button>
-						<button class="game_button" id="Shoot 'Em Up">Shoot 'Em Up</button>
-						<button class="game_button" id="Gambling">Gambling</button>
-						<button class="game_button" id="MOBA">MOBA</button>
-						<button class="game_button" id="Driving/Racing">Driving/Racing</button>
-						<button class="game_button" id="Simulation">Simulation</button>
-						<button class="game_button" id="Educational">Educational</button>
-						<button class="game_button" id="Fighting">Fighting</button>
-						<button class="game_button" id="Wrestling">Wrestling</button>
-						</ul>
-				</div>
-				<div class="time_to_beat subpage">
-					<header>Time to Beat</header>
-					<ul class="button_column time">
-							<button class="game_button"  id="--">  No time data</button> 
-							<button class="game_button"  id="1 9"> 1:00:00-9:00:00</button> 
-							<button class="game_button"  id="10 19"> 10:00:00-19:00:00  </button> 
-							<button class="game_button"  id="20 29">  20:00:00-29:00:00  </button> 
-							<button class="game_button"  id="30 39"> 30:00:00-39:00:00 </button> 
-							<button class="game_button"  id="40 49">40:00:00-49:00:00  </button>
-							<button class="game_button"  id="50 59">  50:00:00-59:00:00 </button> 
-							<button class="game_button"  id="60 69">  60:00:00-69:00:00  </button> 
-							<button class="game_button"  id="70 79">  70:00:00-79:00:00 </button> 
-							<button class="game_button"  id="80 89">  80:00:00-89:00:00  </button> 
-							<button class="game_button"  id="90 99">90:00:00-99:00:00</button> 
-							<button class="game_button"  id="100+">100:00:00 +</button> 
-
-					</ul>
-				</div>
-				<div class="rating subpage">
-					<header>Rating</header>
-					<ul class="button_column score">
-							<button class="game_button"  id="blank"> No rating data</button> 
-							<button class="game_button"  id="1 9">  1% - 9% </button> 
-							<button class="game_button"  id="10 19">  10% - 19%  </button> 
-							<button class="game_button"  id="20 29">  20% - 29%  </button> 
-							<button class="game_button"  id="30 39">  30% - 39%  </button> 
-							<button class="game_button"  id="40 49"> 40% - 49%  </button>
-							<button class="game_button"  id="50 59">  50% - 59%  </button> 
-							<button class="game_button"  id="60 69">  60% - 69%  </button> 
-							<button class="game_button"  id="70 79">  70% - 79%  </button> 
-							<button class="game_button"  id="80 89">  80% - 89%  </button> 
-							<button class="game_button"  id="90 100">  90% - 100% </button>  
-					</ul>
-				</div>
-				<div class="year subpage">
-					<header>Years</header>
-					<ul class="button_column date">
-							<button class="game_button"  id="blank"> No release data</button>  
-							<button class="game_button"  id="1750"> 1750</button>  
-							<button class="game_button"  id="1931"> 1931</button>  
-							<button class="game_button"  id="1932"> 1932</button>  
-							<button class="game_button"  id="1933"> 1933</button>  
-							<button class="game_button"  id="1934"> 1934</button>  
-							<button class="game_button"  id="1935"> 1935</button>  
-							<button class="game_button"  id="1936"> 1936</button> 
-							<button class="game_button"  id="1937"> 1937</button>  
-							<button class="game_button"  id="1938"> 1938</button>  
-							<button class="game_button"  id="1939"> 1939</button>  
-							<button class="game_button"  id="1940"> 1940</button>  
-							<button class="game_button"  id="1941"> 1941</button>  
-							<button class="game_button"  id="1942"> 1942</button>  
-							<button class="game_button"  id="1947"> 1947</button> 
-							<button class="game_button"  id="1947"> 1948</button>  
-							<button class="game_button"  id="1949"> 1949</button>  
-							<button class="game_button"  id="1950"> 1950</button>  
-							<button class="game_button"  id="1951"> 1951</button> 
-							<button class="game_button"  id="1952"> 1952</button>  
-							<button class="game_button"  id="1953"> 1953</button>  
-							<button class="game_button"  id="1954"> 1954</button>  
-							<button class="game_button"  id="1956"> 1956</button> 
-							<button class="game_button"  id="1958"> 1958</button>  
-							<button class="game_button"  id="1959"> 1959</button>  
-							<button class="game_button"  id="1961"> 1961</button>  
-							<button class="game_button"  id="1962"> 1962</button> 
-							<button class="game_button"  id="1963"> 1963</button>  
-							<button class="game_button"  id="1964"> 1964</button>  
-							<button class="game_button"  id="1965"> 1965</button>  
-							<button class="game_button"  id="1966"> 1966</button>  
-							<button class="game_button"  id="1967"> 1967</button> 
-							<button class="game_button"  id="1968"> 1968</button>  
-							<button class="game_button"  id="1969"> 1969</button>  
-							<button class="game_button"  id="1970"> 1970</button>  
-							<button class="game_button"  id="1971"> 1971</button>  
-							<button class="game_button"  id="1972"> 1972</button> 
-							<button class="game_button"  id="1973"> 1973</button> 
-							<button class="game_button"  id="1974"> 1974</button> 
-							<button class="game_button"  id="1975"> 1975</button> 
-							<button class="game_button"  id="1976"> 1976</button> 
-							<button class="game_button"  id="1977"> 1977</button> 
-							<button class="game_button"  id="1978"> 1978</button> 
-							<button class="game_button"  id="1979"> 1979</button> 
-							<button class="game_button"  id="1980"> 1980</button> 
-							<button class="game_button"  id="1981"> 1981</button> 
-							<button class="game_button"  id="1982"> 1982</button> 
-							<button class="game_button"  id="1983"> 1983</button> 
-							<button class="game_button"  id="1984"> 1984</button> 
-							<button class="game_button"  id="1985"> 1985</button> 
-							<button class="game_button"  id="1986"> 1986</button> 
-							<button class="game_button"  id="1987"> 1987</button> 
-							<button class="game_button"  id="1988"> 1988</button>
-							<button class="game_button"  id="1989"> 1989</button> 
-							<button class="game_button"  id="1990"> 1990</button> 
-							<button class="game_button"  id="1991"> 1991</button> 
-							<button class="game_button"  id="1992"> 1992</button> 
-							<button class="game_button"  id="1993"> 1993</button> 
-							<button class="game_button"  id="1994"> 1994</button> 
-							<button class="game_button"  id="1995"> 1995</button> 
-							<button class="game_button"  id="1996"> 1996</button> 
-							<button class="game_button"  id="1997"> 1997</button> 
-							<button class="game_button"  id="1998"> 1998</button> 
-							<button class="game_button"  id="1999"> 1999</button> 
-							<button class="game_button"  id="2000"> 2000</button>
-							<button class="game_button"  id="2001"> 2001</button>  
-							<button class="game_button"  id="2002"> 2002</button>  
-							<button class="game_button"  id="2003"> 2003</button>  
-							<button class="game_button"  id="2004"> 2004</button>  
-							<button class="game_button"  id="2005"> 2005</button>  
-							<button class="game_button"  id="2006"> 2006</button>  
-							<button class="game_button"  id="2007"> 2007</button>  
-							<button class="game_button"  id="2008"> 2008</button>  
-							<button class="game_button"  id="2009"> 2009</button>  
-							<button class="game_button"  id="2010"> 2010</button>  
-							<button class="game_button"  id="2011"> 2011</button>  
-							<button class="game_button"  id="2012"> 2012</button>  
-							<button class="game_button"  id="2013"> 2013</button>  
-							<button class="game_button"  id="2014"> 2014</button>  
-							<button class="game_button"  id="2015"> 2015</button>  
-							<button class="game_button"  id="2016"> 2016 </button>  
-						</ul>
-				</div>
-
-
-
-
-				<!-- Use any element to open the sidenav  ??-->
-			
-				
-				<!-- Add all page content inside this div if you want the side nav to push page content to the right (not used if you only want the sidenav to sit on top of the page -->				
-				<div id="main">
-
-					<div class="title"> <header>VIDEO GAME RANDOMIZER </header>   
-<!-- 					<div class="hint">↩ Choose Filters!</div>	
- -->					<div class="open_menu" style="cursor:pointer" onclick="openNav()">☰</div>
-
- 						<!--<span class="hint">&#x2190;Choose Filters</span>-->
-					</div>
-
-
-					<!-- How to use Slide down div content (*Known issues: Image centering in Firefox, IE cuts off some content.)-->
-					<!-- To close click anywhere -->
-					<div class="usage"> 
-						<div class="usage-content">
-							<h3>How to Use</h3>
-							<div class="usage-checks">
-								<i class="fa fa-check-square fa-2x"></i>
-								<span class="sub">Pick Your Filters:</span> 
-								<p>Using the dropdown menu select what category you want to open. A sub-menu will display buttons for all filters you wish to include. For instance, to get a random video game either on the PS3 or PS2 with a metacritic score between 80-89% click both the "PS3" and the "PS2" buttons from the "Platform" button list and then from the "Score" list click the "80-89%" button. Note that filters are cumulative and selecting both "PS3" and "PS2" buttons means you have a chance to randomly get games from <span class="emphasis">either system.</span> Running the search with <span class="emphasis">no filters selected</span> will give you a completely random game. </p>
-								<br/>
-								<div class="usage-example1">Example of not selected ("Not clicked") buttons:
-									<div  class="ex-button">
-										<button class="game_button">PS3</button>
-										<button class="game_button">PS2</button>
-										<button class="game_button">80%-89%</button>
-									</div>
-									<br/>
-									Example of selected ("clicked") buttons:
-									<div  class="ex-button">
-										<button class="game_button active">PS3</button>
-										<button class="game_button active">PS2</button>
-										<button class="game_button active">80%-89%</button>
-									</div>
-								</div>
-							</div>
-							<div class="usage-checks">
-								<i class="fa fa-check-square fa-2x"></i>
-								<span class="sub">Run the Search:</span> 
-								<p>Navigate to the section of the page labeled "Search" and click the run button located on the fixed website footer. Note you can click the run anytime but you can only view the results if you navigate to the appropriate section.</p>
-
-							</div>
-							<div class="usage-checks">
-								<i class="fa fa-check-square fa-2x"></i>
-								<span class="sub">View your Results:</span> 
-								<p>Information on your selected game is displayed, with the final row of information being a series of download links or Amazon Links at which you can find the game (Hosted by <a href="https://www.emuparadise.me/">Emuparadise</a>). The program runs a search on emuparadise first, if links are found they will be displayed, if not an Amazon search is run to display Amazon links. </p>
-								<br/>
-								<div class="usage-example2">
-								<p>Example of result screen:</p>
-									<img src="../images/result.png" alt="Shin Megami Tensei Nocture">
-								</div>
-							</div>
-							<!-- -->
-								<div class="usage-checks">
-									<i class="fa fa-check-square fa-2x"></i>
-									<span class="sub">Notes:</span> 
-									<p>Please note that download links are more likely to appear for <span class="emphasis">older game platforms.</span> Buttons that appear in pink are platforms that are <span class="emphasis">more likely to have download links available.</span> </p>
-									<br/>
-									<div class="usage-example1">Example buttons that are more likely to have download links:
-									<div  class="ex-button">
-										<button class="game_button special">GameCube</button>
-										<button class="game_button special">PS2</button>
-										<button class="game_button special">Neo Geo</button>
-									</div>
-									<br/>
-								</div>
-							</div>
-
-
-							<!-- -->
-							<div class="usage-checks">
-								<i class="fa fa-exclamation-triangle fa-2x"></i>
-								Issues: On lower spec computers lag occurs when the filters menu is opened in Firefox, games with special characters in the title may not yield download links and may not display correctly.
-							</div>
-							<hr>
-							<div class="usage-checks patch-notes">
-								<i class="fa fa-wrench fa-2x"></i>
-								<span class="">Version 1.4.0:</span> 
-								<ul class="patch-list">
-									<li>Added "How to Use Section" which has instuctions on how to use the website</li>
-									<li>Warnings moved to "How to Use Section"</li>
-									<li>Minor stylistic changes made to the footer and information sections </li>
-									<li>Reduced AJAX calls to decrease initial loading time</li>
-									<li> Added download links for links, Amazon search added as a fallback</li>
-									<li>Removed social share bar</li>
-									<li>Added DISQUS commenting system underneath search results page</li>
-									<li>Advertisments added, please support the site by turning your Ad-blocker off for this site!</li>
-									<li>Overhauled buttons so they are now easier to search and select</li>
-									<li>Fixed image centering problem in Firefox</li>
-									<li>Fixed the site so it works in the most recent (IE11) version of Internet Explorer</li>
-									<li>Added repsonsive design/ mobile support for most devices</li>
-									<li>Amazon search adjusted so only relevant products (i.e video games) are displayed</li>
-
-								</ul>
-							</div>
-							<hr>
-							<div class="usage-checks patch-notes">
-								<i class="fa fa-question fa-2x"></i>
-								<span class="">Q&A:</span> 
-								<ul class="question_answer">
-										
-<li>Q: What's up with the title screen? The games keep changing!</li>
-<li>A: Yes! The game images on the title screen are completely random each time you refresh the website. Take your time and enjoy refreshing the page. Unfortunately these are just images and are not links to anything so don't try click on them.</li>
-
-<li>Q: Is this site SFW (Safe for Work)?</li>
-<li>A: No, there are over 50,000 games in the randomizer database including some NSFW video games so refresh the title page, and run the search at your own risk.</li>
-
-<li>Q: Why doesn't the search present you with a list of video games specified by my filters? </li>
-<li>A: Well that kind of defeats the purpose of being a "random" video game website. At that point it would just be a place where you can search for video games, and there are tons of other websites that already accomplish that task.</li>
-
-<li>Q:Can we get at least 5 random video games with our filters?</li>
-<li>A: No, I do not plan on implementing a feature like that anytime soon. However, I will consider adding a feature where all your search results are kept on the page. Or I might even consider a feature where all the video game search results are cached in your browsers local storage! Actually that sounds cool...</li>
-
-<li>Q:Why itsn't ____ Platform on this list?</li>
-<li>A: While the database does have a lot of platforms it is not completely exhaustive. There are some missing platforms such as arcade machines etc...</li>
-
-<li>Q: Why does the release year stop at 2016? I know new games have come out in 2017!</li>
-<li>A: Yes, I am aware of the new video game releases! This database/application is mainly for the use of finding obsure video games from the past 30 years and it is very comprehensive. Furthermore, the video games on this website will not be updated with the newest video game releases for this purpose. </li>
-
-<li>Q: Where do did you get the rating data from?</li>
-<li>A: The ratings from the games come from Metacritic. Many games do not have rating data because metacritic did not rate those games. (Too old etc...)</li>
-
-<li>Q: Help! I can't seem to find any remasters!</li>
-<li>A: Yeah the database does not include remasters as a separate video game. So if you are looking for Final Fantasy X-2 remaster, you won't find it.</li>
-
-<li>Q: Some of these ratings are don't match on Metacritic...</li>
-<li>A: Yes the way this site was programmed the most recent score from metacritic is added to the game. In some cases the the game is remastered and then the remaster metascore is used. (See above about remasters)</li>
-
-<li>Q: Why do you choose to display Final Fantasy 7, Animal Crossing, Shin Megami Tensei etc... On the information part of the website?</li>
-<li>A: Those are some of my favorite video games and I wanted to display the video games chronologically started from the left (Pong).</li>
-
-<li>Q: Ughhh why DISQUS???</li>
-<li>A: This application/site is just a small side project for me and I want to work on other things in my free time. I don't really want to build a custom comment system and DISQUS is so easy to install and manage. Try it, you might like it!</li>
-
-<li>Q: Sometimes in the result screen _____ has nothing in it?</li>
-<li>A: Yes, not all games have data in every field. If it's blank it was not in the database. The only sure thing that will never be blank is the Platforms field and the name.</li>
-
-<li>Q: Where did you get the time to beat data?</li>
-<li>A: The only place on the Internet that has data like this, HLTB.com. The data for these times to beat were taken around September 2016, so they probably will not match the data displayed on the actual site but they still give a good estimate of how long it should take you beat a game.</li>
-
-<li>Q: Why aren't there download links for the other platforms?</li>
-<li>A: There are NO download links for newer consoles, please if you have the means and can find a store copy of any game you found through the randomizer, please purchase to the support the community and developers of these games.</li>
-
-
-<li>Q: What does "No rating data" and "No time data" mean?</li>
-<li>A: It means when you press the filter button, games that do not have times to beat, or ratings are including the filter search.</li>
-
-<li>Q: I've never heard of some of these games!</li>
-<li>A: Yes, even games released exclusively in Japan and other regions are included.</li>
-
-<li>Q: Can you bring back the Amazon Links for the games that do not have download links?</li>
-<li>A: Of course, if there is enough demand (go to the comments people) then I will gladly add that feature back in.</li>
-
-<li>Q: Does this work in every major browser?</li>
-<li>A: Yes-ish, it has been tested in the most recent versions of Opera, Firefox, IE and Chrome. It works best in Chrome, but has not been tested in Safari.</li>
-
-<li>Q: Is this responsive/mobile first?</li>
-<li>A:Yes, I tested it on most mobile devices. There are media queries!</li>
-
-<li>Q: Why do the download link sometimes show unrelated products/games?</li>
-<li>A: The way the site works is the name of the game is search on emupardise or Amazon, that means my search is only as good as theirs so there will occasionally be errors.</li>
-								</ul>
-							</div>
-							
-							
-						</div>
-					 </div>
-
-
-				<div class="feature1">
-						<h2 id="feat1_header">Comprehensive Database</h2> 
-						
-						<div class="img_holder">
-							<div class="cirlce_img "></div>
-							<div class="cirlce_img "></div>
-							<div class="cirlce_img "></div>
-							<div class="cirlce_img "></div>
-							<div class="cirlce_img "></div>
-							<div class="cirlce_img "></div>
-						</div>
-						  <p>Featuring games from Pong to Deus Ex: Mankind Divided, and everything in-between. </p>
-					</div>	
-					<div class="feature2">
-						<h2> Filters</h2>
-						<div><p>Variety of filters: Platforms, Genre , Release Year , Time to Beat , Rating </p></div>
-						<div class="filter_showcase">	
-							<button>Platforms</button>
-							<button>Genre</button>
-							<button>Release Year</button>
-							<button>Time to Beat</button>
-							<button> Rating </button>
-						</div>
-
-				   </div>
-					<div class="execution">
-					<script type="text/javascript">
-  ( function() {
-    if (window.CHITIKA === undefined) { window.CHITIKA = { 'units' : [] }; };
-    var unit = {"calltype":"async[2]","publisher":"ethanny2","width":728,"height":90,"sid":"Chitika Default"};
-    var placement_id = window.CHITIKA.units.length;
-    window.CHITIKA.units.push(unit);
-    document.write('<div id="chitikaAdBlock-' + placement_id + '"></div>');
-}());
-</script>
-<script type="text/javascript" src="//cdn.chitika.net/getads.js" async></script>
- 
-
-						<h2 class="gameTitle">Search</h2>
-						
- 						<div class="gamePage">
- 						
-
- 							
- 						 </div> <!-- END OF GAME PAGE -->
-
- 					
-
-					</div> <!-- End of Execution page -->
-					
-											
-                                                      				<div id="disqus_thread"></div>
-<script>
-
-/**
-*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-/*
-var disqus_config = function () {
-this.page.url = 'http://videogamerandomizer.com/html/second_page.html';  // Replace PAGE_URL with your page's canonical URL variable
-this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-};
-*/
-(function() { // DON'T EDIT BELOW THIS LINE
-var d = document, s = d.createElement('script');
-s.src = 'https://http-videogamerandomizer-com.disqus.com/embed.js';
-s.setAttribute('data-timestamp', +new Date());
-(d.head || d.body).appendChild(s);
-})();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-						
- 			
-			</div> <!-- End of main -->
-
-
-					
-					
-				 		
-				
-					<footer class="site_footer">
-						<!--<a href="https://github.com/etha1223"> Made by Ethan Soo Hon</a> |--> 
-					<!-- This will now include a how to use info map and the warnings in one -->
-					<a href="javascript:void(0)" onclick="showUsage()">How to Use</a> 
-					<div class="support" ><a href="../index.html"> | Title Page </a></div>
-					<!-- Gives some instructions --> 
-					<div class="run_button_pos"> <button class="run_button">Run Search</button></div>
-  				</footer>
-
-
-<!-- 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
- --> 		
- 		
-    	<script type="text/javascript" src="../javascript/button_states.js"></script>
-	<script type="text/javascript" src="../javascript/side_navigation.js"></script>
-	<script type="text/javascript" src="../javascript/gatherUserSelections.js"></script>
-
-
-
-</body>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta
+      name="description"
+      content="Choose a variety of filters and get a random video game.
+	Comprehenisve data with over 50,000 to be selected."
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="random,games,generator,lottery,roulette,free,filter,metacritic,htlb.com" />
+    <meta name="authors" content="Ethan" />
+    <meta name="content-language" content="en" />
+    <title>Game Randomizer | Random Game Generator with Filter</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <main>
+      <section id="hero">
+        <h1>Video Game Randomizer</h1>
+        <h5>Find your game</h5>
+        <img class="simon" src="../images/simon-sprite.gif" alt="" />
+        <img class="megaman" src="../images/megaman-sprite.gif" alt="" />
+        <img class="rayman" src="../images/rayman-transparent-sprite.gif" alt="" />
+      </section>
+      <section class="slice slice1">
+        <h2>30,000+ games</h2>
+        <div>
+          <img src="../images/controller.png" alt="Game controller" />
+        </div>
+        <p>
+          A database of all video games from 1970 - 2016. Games released in the last decade have additional information
+          including...
+        </p>
+        <ul>
+          <li>
+            Aggregate review score with data from
+            <a rel="nooopener" target="_blank" href="https://www.metacritic.com/">Metacritic</a>
+          </li>
+          <li>
+            Stats on how long it takes to complete a game from
+            <a rel="nooopener" target="_blank" href="https://howlongtobeat.com/">HTLB</a>
+          </li>
+          <!-- <li>Games from obscure consoles like the Amiga, Sharp X68000, arcade machines and more</li> -->
+        </ul>
+      </section>
+      <section>
+        <h2>Filter anything</h2>
+        <div>
+          <img src="../images/filter.png" alt="Filter" />
+        </div>
+        <p>
+          Specify your filters to get a random game you've never heard of before. Filters include platforms, genre,
+          release year, average time to beat and average rating.
+        </p>
+      </section>
+      <section class="slice slice2">
+        <h2>Find that hidden gem</h2>
+        <div>
+          <img src="../images/link.png" alt="Link with accent lines" />
+        </div>
+        <p>
+          Results for your randomly choosen game come with links to purchase that game; or links to find that game if it
+          is out of print.
+        </p>
+        <p>
+          Or... use the <a rel="nooopener" target="_blank" href="/random.html">cover art browser</a> to randomly find
+          something you like!
+        </p>
+      </section>
+    </main>
+  </body>
 </html>
+<!-- 
+<button>Platforms</button>
+<button>Genre</button>
+<button>Release Year</button>
+<button>Time to Beat</button>
+<button>Rating</button> -->
