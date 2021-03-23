@@ -278,6 +278,7 @@ section {
   align-items: center;
   flex-direction: column;
   .game {
+    width:100%;
     p {
       width: 100%;
     }
@@ -306,6 +307,56 @@ section {
         width: 100%;
       }
     }
+  }
+}
+
+.game__imgcontainer.loading {
+  height: 20rem;
+  width: 50%;
+}
+.game__title.loading {
+  height: 5rem;
+  width: 50%;
+  margin: 1rem;
+  border-radius: 3px;
+}
+.game__description.loading {
+  height: 8rem;
+  width: 50%;
+  margin: 1rem;
+  border-radius: 3px;
+}
+
+/* The loading Class */
+.loading {
+  position: relative;
+  background-color: #e2e2e2;
+}
+
+/* The moving element */
+.loading::after {
+  display: block;
+  content: "";
+  position: absolute;
+  left: 30%;
+  width: 30%;
+  height: 100%;
+  transform: translateX(-140%);
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(transparent),
+    color-stop(rgba(70, 67, 67, 0.829)),
+    to(transparent)
+  );
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.336), transparent);
+  animation: loading 0.8s infinite;
+}
+
+@keyframes loading {
+  100% {
+    transform: translateX(100%);
   }
 }
 

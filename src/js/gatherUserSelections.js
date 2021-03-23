@@ -149,9 +149,17 @@ function gatherButtonValues() {
   sendSelectedData(data);
 }
 
-$(document).on("click", ".run_button", function () {
+$(".run_button").on("click", function () {
   console.log("RUN BUTTON PRESSED");
+  document.getElementsByClassName("game")[0].innerHTML = `
+  <div class="game__title loading"></div>
+  <div class="game__imgcontainer loading"></div>
+  <div class="game__description loading"></div>`;
   gatherButtonValues();
+});
+$(".clear_button").on("click", function () {
+  console.log("CLEAR BUTTON PRESSED");
+  uncheckInputs();
 });
 
 async function sendSelectedData(data) {
@@ -176,18 +184,6 @@ async function sendSelectedData(data) {
     var formattedResponse = await request.json();
     console.log({ formattedResponse });
     /* Moving to the top*/
-    var platformString = "Platforms: ";
-    if (formattedResponse.platforms != undefined) {
-      for (let i = 0; i < formattedResponse.platforms.length; i++) {
-        if (i == formattedResponse.platforms.length - 1) {
-          platformString += formattedResponse.platforms[i];
-        } else {
-          platformString += formattedResponse.platforms[i] + ",";
-        }
-      }
-    }
-    var escapedCover = formattedResponse.cover;
-
     // var containsEmuPlat = false;
     // console.log('PLATSTRING IS: '+ platformString);
     globalName = formattedResponse.name;
@@ -228,18 +224,9 @@ async function sendSelectedData(data) {
     //sendAmazonData(globalName);
 
     // scrapeEmuparadise(globalName, escapedCover);
-    var genreString = "Genres: ";
-    if (formattedResponse.genres != undefined) {
-      for (let i = 0; i < formattedResponse.genres.length; i++) {
-        if (i == formattedResponse.genres.length - 1) {
-          genreString += formattedResponse.genres[i];
-        } else {
-          genreString += formattedResponse.genres[i] + " , ";
-        }
-      }
-    }
     if (!formattedResponse.Sorry) {
       //Success display game on page
+      document.getElementById("lds-default").style.display = "none";
       console.log("Game found! displaying...");
       const contents = `<h1 class="game__title">${formattedResponse.name}</h1>
       <h3 class="game__rating"><span class="bold">Rating: </span> ${
