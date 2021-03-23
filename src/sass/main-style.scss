@@ -144,6 +144,11 @@ section {
 
 .filters {
   padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
   h3 {
     font-family: sans-serif;
     text-align: left;
@@ -154,14 +159,34 @@ section {
 }
 
 .checkbox-list {
+  margin: 2rem 0;
   column-count: 2;
   border: 1px solid gray;
-  padding:1rem;
+  padding: 1rem;
+  width: 100%;
+  &.time,
+  &.score,
+  &.plaform,
+  &.date {
+    width: auto;
+  }
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: left;
+  flex-wrap: wrap;
+  h2 {
+    font-size: medium;
+  }
+  width: 100%;
 }
 
 .checkbox-list label {
   font-family: sans-serif;
-  font-size: 13px;
+  font-size: 0.8rem;
   flex: 0 0 50%;
   font-weight: 400;
   margin-bottom: 5px;
@@ -170,6 +195,20 @@ section {
   text-align: left;
   padding: 0.2rem;
 }
+
+.run_button {
+  background: #5a80c5;
+  color: white;
+  font-family: sans-serif;
+  font-size: large;
+  padding:0.5rem;
+  border-radius: 3px;
+  text-transform: capitalize;
+  border:1px solid rgba(129, 125, 125, 0.753);
+  margin: 1.5rem 0;
+  cursor:pointer;
+}
+
 
 .cutoff {
   display: -webkit-box;
@@ -233,6 +272,25 @@ section {
       animation-duration: 12s;
     }
   }
+  .checkbox-list {
+    &.time,
+    &.score {
+      width: 80%;
+    }
+    &.date {
+      width: 55%;
+    }
+  }
+}
+
+@media only screen and (min-width: 500px) {
+  .checkbox-list {
+    &.time,
+    &.score,
+    &.date {
+      width: auto;
+    }
+  }
 }
 
 @media only screen and (min-width: 600px) {
@@ -243,6 +301,14 @@ section {
     }
     .megaman {
       animation-duration: 15s;
+    }
+  }
+  .checkbox-list {
+    column-count: 3;
+    &.time,
+    &.score,
+    &.date {
+      width: auto;
     }
   }
 }
@@ -257,6 +323,36 @@ section {
       animation-duration: 20s;
     }
   }
+  .container {
+    &.half {
+      width: 45%;
+      margin: 0.5rem;
+    }
+  }
+  .checkbox-list {
+    column-count: 3;
+    &.time,
+    &.score,
+    &.date,
+    &.genre,
+    &.platform {
+      width: auto;
+    }
+    &.time,
+    &.score {
+      // height: 14rem;
+      // min-height: 14rem;
+      margin: 0;
+      column-count: 2;
+    }
+  }
+  .checkbox-list label {
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+  }
+}
+
+@media only screen and (min-width: 900px) {
 }
 
 @media only screen and (min-width: 1024px) {

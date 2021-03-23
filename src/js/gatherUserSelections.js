@@ -106,6 +106,13 @@ function gatherButtonValues() {
   $.each(scoreButtons, function (_, value) {
     var tempJQ = $(value);
     var tempId = tempJQ.attr("id");
+    if (tempId !== "blank") {
+      //looks like 10% 19% remove percent signs
+      tempId.replace(/%/g, "");
+      console.log("Calling replace");
+    }
+    console.log({ tempId });
+
     if (!tempJQ.is(":hidden") && tempJQ.prop("checked")) {
       //console.log( ' currentButton is not hidden and active'  + tempJQ.attr('id'));
       selectedScores.push(tempId);
