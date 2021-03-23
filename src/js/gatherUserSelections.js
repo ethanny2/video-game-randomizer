@@ -108,10 +108,8 @@ function gatherButtonValues() {
     var tempId = tempJQ.attr("id");
     if (tempId !== "blank") {
       //looks like 10% 19% remove percent signs
-      tempId.replace(/%/g, "");
-      console.log("Calling replace");
+      tempId = tempId.replace(/%/g, "");
     }
-    console.log({ tempId });
 
     if (!tempJQ.is(":hidden") && tempJQ.prop("checked")) {
       //console.log( ' currentButton is not hidden and active'  + tempJQ.attr('id'));
@@ -173,9 +171,8 @@ async function sendSelectedData(data) {
     console.log(`Error with fetch request ${request.statusText}`);
     return;
   } else {
-    // console.log("PRINTING THE RESPONSE IN THE SUCCESS FUNCTION!!");
-    console.log({ request });
-    // debugger;
+    const container = document.getElementsByClassName("game")[0];
+    container.innerHTML = "";
     var formattedResponse = await request.json();
     console.log({ formattedResponse });
     /* Moving to the top*/
@@ -230,180 +227,7 @@ async function sendSelectedData(data) {
 
     //sendAmazonData(globalName);
 
-    scrapeEmuparadise(globalName, escapedCover);
-
-    $("#results .gamePage").empty();
-    $("#results .gameTitle").empty();
-    let gamePage = $("#results .gamePage");
-    let div_title = $("#results .gameTitle");
-    let div_sum = $('<div class="slideDown"></div>');
-    let sum_icon = $("<i></i>");
-    sum_icon.addClass("fa fa-info-circle fa-2x");
-    sum_icon.css({
-      "padding-right": "1.5%"
-    });
-    div_sum.append(sum_icon);
-    div_sum.addClass("game_sum");
-    div_sum.css({
-      float: "left",
-      // "border":"2px solid black",
-      "text-align": "left",
-      padding: ".2%"
-    });
-
-    div_sum.width("100%");
-    div_sum.height("20%");
-
-    var div_genre = $('<div class="slideDown"></div>');
-    div_genre.addClass("game_genre");
-    var genre_icon = $("<i></i>");
-    genre_icon.addClass("fa fa-info-circle fa-2x");
-    genre_icon.css({
-      "padding-right": "1%"
-    });
-    div_genre.append(genre_icon);
-
-    div_genre.css({
-      float: "left",
-      //"border":"2px solid black",
-      "text-align": "left",
-      padding: ".2%"
-    });
-    div_genre.width("100%");
-    div_genre.height("20%");
-
-    var div_platform = $('<div class="slideDown"></div>');
-    div_platform.addClass("game_platform");
-    var plat_icon = $("<i></i>");
-    plat_icon.addClass("fa fa-gamepad fa-2x");
-    plat_icon.css({
-      "padding-right": "2%"
-    });
-    div_platform.append(plat_icon);
-    div_platform.css({
-      float: "left",
-      //"border":"2px solid black",
-      "text-align": "left",
-      padding: ".2%"
-    });
-    div_platform.width("100%");
-    div_platform.height("20%");
-
-    var div_year = $('<div class="slideDown"></div>');
-    div_year.addClass("game_year");
-    var year_icon = $("<i></i>");
-    year_icon.addClass("fa fa-calendar-o fa-2x");
-    year_icon.css({
-      "padding-right": "2%"
-    });
-    div_year.append(year_icon);
-
-    div_year.css({
-      float: "left",
-      //"border":"2px solid black",
-      "text-align": "left",
-      padding: ".2%"
-    });
-    div_year.width("100%");
-    div_year.height("20%");
-
-    var div_rating = $('<div class="slideDown"></div>');
-    div_rating.addClass("game_rating");
-
-    /*After rating  , this is NOW FOR THE SLIDER TO be created*/
-    var div_suggestion = $("<div></div>");
-    div_suggestion.addClass("game_links");
-    var suggestion_icon = $("<i></i>");
-    suggestion_icon.addClass("fa fa-download fa-2x");
-
-    var link_icon1 = $("<i></i>");
-    link_icon1.addClass("fa fa-link fa-2x");
-
-    suggestion_icon.css({
-      "padding-right": "2%"
-    });
-
-    div_suggestion.append(suggestion_icon);
-    div_suggestion.css({
-      float: "left",
-      //"border":"2px solid black",
-      "text-align": "left",
-      padding: ".2%",
-      "margin-bottom": "5%"
-    });
-    div_suggestion.width("100%");
-    div_suggestion.height("100%");
-
-    var rating_icon = $("<i></i>");
-    rating_icon.addClass("fa fa-star fa-2x");
-    rating_icon.css({
-      "padding-right": "2%"
-    });
-    div_rating.append(rating_icon);
-
-    /* Add animation to make bar fill*/
-    div_rating.css({
-      float: "left",
-      "text-align": "left",
-      padding: ".2%"
-    });
-    div_rating.width("100%");
-    div_rating.height("20%");
-
-    var div_time = $('<div class="slideDown"></div>');
-    var time_icon = $("<i></i>");
-    time_icon.addClass("fa fa-hourglass-end fa-2x");
-    time_icon.css({
-      "padding-right": "2%"
-    });
-    div_time.append(time_icon);
-
-    div_time.addClass("game_time");
-    div_time.css({
-      float: "left",
-      "text-align": "left",
-      padding: ".2%"
-    });
-    div_time.width("100%");
-    div_time.height("20%");
-
-    /*Need to helper divs to create a shine effect */
-    let img_div = $('<div class="slideDown"></div>');
-    img_div.addClass("gameImage");
-
-    img_div.css({
-      width: "50%",
-      height: "50%",
-      "padding-top": "15px",
-      // "overflow":"hidden",
-      margin: "auto",
-      display: "block",
-      "text-align": "center",
-      clear: "both"
-    });
-
-    var img_raw = $("<img src=" + escapedCover + " />");
-    /*Appending the image */
-
-    img_div.append(img_raw);
-
-    // div_img.css({
-    //  	'content':'url('+formattedResponse.cover+')'
-    //  });
-    // div_img.width("100%");
-    // div_img.height("100%");
-
-    // img_raw.width("25%");
-    // img_raw.height("25%");
-    img_div.width("100%");
-    img_div.height("100%");
-
-    /*Setting the name here!!! */
-    div_title.append(formattedResponse.name);
-
-    console.log(div_title.text());
-    //console.log(formattedResponse.name);
-    div_sum.append("Summary: " + formattedResponse.summary);
+    // scrapeEmuparadise(globalName, escapedCover);
     var genreString = "Genres: ";
     if (formattedResponse.genres != undefined) {
       for (let i = 0; i < formattedResponse.genres.length; i++) {
@@ -414,40 +238,31 @@ async function sendSelectedData(data) {
         }
       }
     }
-
-    div_time.append(
-      "Main story: " +
-        formattedResponse.main_story +
-        " | " +
-        " Main Story + Extras: " +
-        formattedResponse.main_extras +
-        " | " +
-        " Combined: " +
-        formattedResponse.combined +
-        " | " +
-        " Completionist: " +
-        formattedResponse.completionist
-    );
-    div_genre.append(genreString);
-    div_platform.append(platformString);
-    div_year.append("Orginal Release Year: " + formattedResponse.releaseDate);
-    div_rating.append("Rating: " + formattedResponse.rating);
-    /*Making it look pretty */
-    gamePage = $(".execution .gamePage");
-    gamePage.css({
-      "font-size": ".80em",
-      "text-align": "center"
-    });
-
     if (!formattedResponse.Sorry) {
-      $(".execution .gamePage").append(img_div);
-      gamePage.append($('<div class="slide-container slideDown "></div>'));
-      $(".execution .gamePage").append(div_sum);
-      $(".execution .gamePage").append(div_genre);
-      $(".execution .gamePage").append(div_year);
-      $(".execution .gamePage").append(div_time);
-      $(".execution .gamePage").append(div_platform);
-      $(".execution .gamePage").append(div_rating);
+      //Success display game on page
+      console.log("Game found! displaying...");
+      const contents = `<h1 class="game__title">${formattedResponse.name}</h1>
+      <h3 class="game__rating"><span class="bold">Rating: </span> ${
+        formattedResponse.rating ? formattedResponse.rating : "N/A"
+      }</h3>
+      <div class="game__content">
+        <div class="game__imgcontainer">
+          <img src="${formattedResponse.cover}" alt="${formattedResponse.name} box art" />
+        </div>
+        <p class="release"><span class="bold">Release Date:</span> ${formattedResponse.releaseDate}</p>
+        <p>
+          <span class="bold"> Summary: </span> ${formattedResponse.summary}
+        </p>
+        <p><span class="bold"> Time to Complete Main Story: </span> ${formattedResponse.main_story}</p>
+        <p><span class="bold"> Time to 100% complete:</span> ${formattedResponse.completionist} </p>
+        <p><span class="bold"> Genres:</span>${formattedResponse.platforms.join(", ")}</p>
+        <p><span class="bold"> Platforms: </span> ${formattedResponse.genres.join(", ")}</p>
+        <p class="info">
+          <span class="bold">Additional Info: </span>
+          <a href="${formattedResponse.info}">giantbomb.com</a>
+        </p>
+      </div>`;
+      container.innerHTML += contents;
     } else {
       let sorry_div = $("<div></div>");
       sorry_div.text(formattedResponse.Sorry);
