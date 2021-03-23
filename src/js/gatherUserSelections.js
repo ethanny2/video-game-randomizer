@@ -45,11 +45,8 @@ var emu_consoles = [
   "Atari 7800",
   "Sega Master System"
 ];
-jQuery.support.cors = true;
+// jQuery.support.cors = true;
 
-$(document).ajaxStart(function () {
-  Pace.restart();
-});
 var globalName;
 
 //Platform
@@ -71,56 +68,63 @@ function clearData() {
   selectedYears = [];
 }
 
+function uncheckInputs() {
+  var inputs = document.getElementsByTagName("input");
+  for (let i = 0; i < inputs.length; i++) {
+    const element = inputs[i];
+    element.checked = false;
+  }
+}
+
 function gatherButtonValues() {
   //Clear the array.
   clearData();
   console.log("in here!!!");
-  var platformButtons = $(".button_column.platform button");
-  var genreButtons = $(".button_column.genre button");
-  var scoreButtons = $(".button_column.score button");
-  var timeButtons = $(".button_column.time button");
-  var yearButtons = $(".button_column.date button");
-  $.each(platformButtons, function (index, value) {
+  var platformButtons = $(".checkbox-list.platform input");
+  var genreButtons = $(".checkbox-list.genre input");
+  var scoreButtons = $(".checkbox-list.score input");
+  var timeButtons = $(".checkbox-list.time input");
+  var yearButtons = $(".checkbox-list.date input");
+  $.each(platformButtons, function (_, value) {
     var tempJQ = $(value);
     var tempId = tempJQ.attr("id");
-    //console.log("id: "+ tempId);
-    if (!tempJQ.is(":hidden") && tempJQ.hasClass("active")) {
+    if (!tempJQ.is(":hidden") && tempJQ.prop("checked")) {
       //console.log( ' currentButton is not hidden and active '  + tempJQ.attr('id'));
       selectedPlats.push(tempId);
     }
     //console.log(selectedPlats);
   });
-  $.each(genreButtons, function (index, value) {
+  $.each(genreButtons, function (_, value) {
     var tempJQ = $(value);
     var tempId = tempJQ.attr("id");
-    if (!tempJQ.is(":hidden") && tempJQ.hasClass("active")) {
+    if (!tempJQ.is(":hidden") && tempJQ.prop("checked")) {
       //console.log( ' currentButton is not hidden and active '  + tempJQ.attr('id'));
       selectedGenres.push(tempId);
     }
     //console.log(selectedGenres);
   });
-  $.each(scoreButtons, function (index, value) {
+  $.each(scoreButtons, function (_, value) {
     var tempJQ = $(value);
     var tempId = tempJQ.attr("id");
-    if (!tempJQ.is(":hidden") && tempJQ.hasClass("active")) {
+    if (!tempJQ.is(":hidden") && tempJQ.prop("checked")) {
       //console.log( ' currentButton is not hidden and active'  + tempJQ.attr('id'));
       selectedScores.push(tempId);
     }
     //	console.log(selectedScores);
   });
-  $.each(timeButtons, function (index, value) {
+  $.each(timeButtons, function (_, value) {
     var tempJQ = $(value);
     var tempId = tempJQ.attr("id");
-    if (!tempJQ.is(":hidden") && tempJQ.hasClass("active")) {
+    if (!tempJQ.is(":hidden") && tempJQ.prop("checked")) {
       //console.log( 'currentButton is not hidden and active '  + tempJQ.attr('id'));
       selectedTimes.push(tempId);
     }
     //	console.log(selectedTimes);
   });
-  $.each(yearButtons, function (index, value) {
+  $.each(yearButtons, function (_, value) {
     var tempJQ = $(value);
     var tempId = tempJQ.attr("id");
-    if (!tempJQ.is(":hidden") && tempJQ.hasClass("active")) {
+    if (!tempJQ.is(":hidden") && tempJQ.prop("checked")) {
       //console.log( 'currentButton is not hidden and active'  + tempJQ.attr('id'));
       selectedYears.push(tempId);
     }
@@ -128,7 +132,7 @@ function gatherButtonValues() {
   });
 
   //Put the them in an object to send as data through the post
-  data = {
+  let data = {
     platformArray: selectedPlats,
     genreArray: selectedGenres,
     scoreArray: selectedScores,
@@ -143,46 +147,46 @@ function gatherButtonValues() {
 $(document).on("click", ".run_button", function () {
   console.log("RUN BUTTON PRESSED");
   gatherButtonValues();
-  //activateProgressBar();
 });
 
-function sendSelectedData(data) {
-  var request = $.ajax({
+async function sendSelectedData(data) {
+  console.log({ data });
+  let request = await fetch("http://localhost/game-randomizer-portfolio-update/src/php/queryDatabase.php", {
     /* For web*/
     //url: '../php/queryDatabase.php',
     /* For local testing*/
-    url: "http://localhost/Video Game Randomizer Ver 2.0/php/queryDatabase.php",
-    type: "post",
-    data: data
+    // url: "http://localhost/Video Game Randomizer Ver 2.0/php/queryDatabase.php",
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json"
+    }
   });
-  request.done(function (response, textStatus, jqXHR) {
-    //console.log("Launching AJAX request for selecting games!");
-    // console.log(response);
-    //Get the selected games information
-  });
-  request.fail(function (jqXHR, textStatus, errorThrown) {
-    console.error("The following error occurred: " + (textStatus, errorThrown));
-  });
-  request.success(function (response) {
+  if (!request.ok) {
+    console.log(`Error with fetch request ${request.statusText}`);
+    return;
+  } else {
     // console.log("PRINTING THE RESPONSE IN THE SUCCESS FUNCTION!!");
-    console.log({ response });
-    var formatedResponse = JSON.parse(response);
+    console.log({ request });
+    // debugger;
+    var formattedResponse = await request.json();
+    console.log({ formattedResponse });
     /* Moving to the top*/
     var platformString = "Platforms: ";
-    if (formatedResponse.platforms != undefined) {
-      for (var i = 0; i < formatedResponse.platforms.length; i++) {
-        if (i == formatedResponse.platforms.length - 1) {
-          platformString += formatedResponse.platforms[i];
+    if (formattedResponse.platforms != undefined) {
+      for (let i = 0; i < formattedResponse.platforms.length; i++) {
+        if (i == formattedResponse.platforms.length - 1) {
+          platformString += formattedResponse.platforms[i];
         } else {
-          platformString += formatedResponse.platforms[i] + ",";
+          platformString += formattedResponse.platforms[i] + ",";
         }
       }
     }
-    var escapedCover = formatedResponse.cover;
+    var escapedCover = formattedResponse.cover;
 
     // var containsEmuPlat = false;
     // console.log('PLATSTRING IS: '+ platformString);
-    globalName = formatedResponse.name;
+    globalName = formattedResponse.name;
     // 	   for(var i =0;i<emu_consoles.length;i++){
     // 	   	console.log('emu_consoles[i]: '+emu_consoles[i]);
     // 	   		if(platformString.indexOf(emu_consoles[i])!=-1){
@@ -221,13 +225,12 @@ function sendSelectedData(data) {
 
     scrapeEmuparadise(globalName, escapedCover);
 
-    $(".execution .gamePage").empty();
-    $(".execution .gameTitle").empty();
-    var gamePage = $(".execution .gamePage");
-
-    var div_title = $(".execution .gameTitle");
-    var div_sum = $('<div class="slideDown"></div>');
-    var sum_icon = $("<i></i>");
+    $("#results .gamePage").empty();
+    $("#results .gameTitle").empty();
+    let gamePage = $("#results .gamePage");
+    let div_title = $("#results .gameTitle");
+    let div_sum = $('<div class="slideDown"></div>');
+    let sum_icon = $("<i></i>");
     sum_icon.addClass("fa fa-info-circle fa-2x");
     sum_icon.css({
       "padding-right": "1.5%"
@@ -358,7 +361,7 @@ function sendSelectedData(data) {
     div_time.height("20%");
 
     /*Need to helper divs to create a shine effect */
-    img_div = $('<div class="slideDown"></div>');
+    let img_div = $('<div class="slideDown"></div>');
     img_div.addClass("gameImage");
 
     img_div.css({
@@ -378,7 +381,7 @@ function sendSelectedData(data) {
     img_div.append(img_raw);
 
     // div_img.css({
-    //  	'content':'url('+formatedResponse.cover+')'
+    //  	'content':'url('+formattedResponse.cover+')'
     //  });
     // div_img.width("100%");
     // div_img.height("100%");
@@ -389,47 +392,47 @@ function sendSelectedData(data) {
     img_div.height("100%");
 
     /*Setting the name here!!! */
-    div_title.append(formatedResponse.name);
+    div_title.append(formattedResponse.name);
 
     console.log(div_title.text());
-    //console.log(formatedResponse.name);
-    div_sum.append("Summary: " + formatedResponse.summary);
+    //console.log(formattedResponse.name);
+    div_sum.append("Summary: " + formattedResponse.summary);
     var genreString = "Genres: ";
-    if (formatedResponse.genres != undefined) {
-      for (var i = 0; i < formatedResponse.genres.length; i++) {
-        if (i == formatedResponse.genres.length - 1) {
-          genreString += formatedResponse.genres[i];
+    if (formattedResponse.genres != undefined) {
+      for (let i = 0; i < formattedResponse.genres.length; i++) {
+        if (i == formattedResponse.genres.length - 1) {
+          genreString += formattedResponse.genres[i];
         } else {
-          genreString += formatedResponse.genres[i] + " , ";
+          genreString += formattedResponse.genres[i] + " , ";
         }
       }
     }
 
     div_time.append(
       "Main story: " +
-        formatedResponse.main_story +
+        formattedResponse.main_story +
         " | " +
         " Main Story + Extras: " +
-        formatedResponse.main_extras +
+        formattedResponse.main_extras +
         " | " +
         " Combined: " +
-        formatedResponse.combined +
+        formattedResponse.combined +
         " | " +
         " Completionist: " +
-        formatedResponse.completionist
+        formattedResponse.completionist
     );
     div_genre.append(genreString);
     div_platform.append(platformString);
-    div_year.append("Orginal Release Year: " + formatedResponse.releaseDate);
-    div_rating.append("Rating: " + formatedResponse.rating);
+    div_year.append("Orginal Release Year: " + formattedResponse.releaseDate);
+    div_rating.append("Rating: " + formattedResponse.rating);
     /*Making it look pretty */
-    var gamePage = $(".execution .gamePage");
+    gamePage = $(".execution .gamePage");
     gamePage.css({
       "font-size": ".80em",
       "text-align": "center"
     });
 
-    if (!formatedResponse.Sorry) {
+    if (!formattedResponse.Sorry) {
       $(".execution .gamePage").append(img_div);
       gamePage.append($('<div class="slide-container slideDown "></div>'));
       $(".execution .gamePage").append(div_sum);
@@ -439,8 +442,8 @@ function sendSelectedData(data) {
       $(".execution .gamePage").append(div_platform);
       $(".execution .gamePage").append(div_rating);
     } else {
-      sorry_div = $("<div></div>");
-      sorry_div.text(formatedResponse.Sorry);
+      let sorry_div = $("<div></div>");
+      sorry_div.text(formattedResponse.Sorry);
       sorry_div.css({
         margin: "auto 0",
         "font-size": "12vh",
@@ -450,9 +453,8 @@ function sendSelectedData(data) {
       });
       $(".execution .gamePage").append(sorry_div);
     }
-  });
-} //End of outer AJAX Success call
-
+  } //End of else for successfull response
+}
 /* Used to insert image into 3d title dynamically*/
 function helperImages(imageLink) {
   console.log("Image link is " + imageLink);
@@ -487,26 +489,22 @@ function scrapeEmuparadise(gameName, imageLink) {
         sendAmazonData(gameName, imageLink);
         //displayLinksError();
       } else {
-        var formatedResponse = JSON.parse(response);
-        //console.log(formatedResponse[0]['name']);
-        displayLinks(formatedResponse, imageLink);
+        var formattedResponse = JSON.parse(response);
+        //console.log(formattedResponse[0]['name']);
+        displayLinks(formattedResponse, imageLink);
       }
     });
 }
 
 function displayLinks(data, imageLink) {
   /* When slick is loaded is has a slick-initialized class*/
-  container = $(".slide-container");
-  if (container.hasClass("slick-initialized")) {
-    container.slick("unslick");
-  }
+  let container = $("#results");
   container.empty();
-
-  for (var i = 0; i < data.length; i++) {
+  for (let i = 0; i < data.length; i++) {
     if (data[i]["link"] !== "https://www.emuparadise.me-download") {
       // element = $('<a class="slide" target="blank" href="'+data[i]['link']+'"<span>'+data[i]['name']+'</span></a>');
       //<div class = "tdimension"><a href = "#"></a></div>
-      element = $(
+      let element = $(
         '<div class = "tdimension"><a class="dynamicImage" target="blank" href="' +
           data[i]["link"] +
           '"><span>' +
@@ -573,10 +571,7 @@ function displayLinks(data, imageLink) {
 }
 
 function displayLinksError() {
-  container = $(".slide-container");
-  if (container.hasClass("slick-initialized")) {
-    container.slick("unslick");
-  }
+  let container = $("#results");
   container.empty();
   var errorMessage = $("<h3>Sorry no download links found for this game</h3>");
   container.append(errorMessage);
@@ -586,22 +581,19 @@ function displayLinksError() {
 
 function displayAmazonLinks(data, imageLink) {
   /* When slick is loaded is has a slick-initialized class*/
-  container = $(".slide-container");
-  if (container.hasClass("slick-initialized")) {
-    container.slick("unslick");
-  }
+  let container = $("#results");
   container.empty();
 
   /* Chnage this for amazon*/
 
-  var i = 0;
+  let i = 0;
   //item['productUrl'])
   //item['imageUrl']
   // element = $('<div class = "tdimension"><a class="dynamicImage" target="blank" href="'+data[i]['link']+'"><span>'+data[i]['name']+'</span></a></div>');
   for (let item of data) {
     var imageClass = "amazonImage" + i;
     var amazonImage = item["imageUrl"];
-    element = $(
+    let element = $(
       '<div class = "tdimension"><a class="' +
         imageClass +
         '" target="blank" href="' +
@@ -726,7 +718,7 @@ function displayAmazonLinks(data, imageLink) {
 
 function sendAmazonData(searchQuery, imageLink) {
   //console.log("Starting sendAmazon Data function");
-  data2 = {
+  let data2 = {
     name: searchQuery
   };
   // console.log("Done with generating all the stuff, starting amazon api POST");

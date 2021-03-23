@@ -1,6 +1,8 @@
 <?php
   // Allow from any origin
-   header('Access-Control-Allow-Origin: *');
+  header('Access-Control-Allow-Origin: *');
+  header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+  header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, X-Requested-With");
    //ns8505.hostgator.com
   $servername = "localhost";
   /*For online */
@@ -16,8 +18,11 @@ $username = "root";
 
 error_reporting(0);
 $conn = new mysqli($servername, $username, $password, $dbname, $port);
-// print_r($_POST);
-// header('Content-Type: application/json');
+$json = file_get_contents('php://input');
+$reqObj = json_decode($json);
+// echo json_encode(!empty($reqObj->scoreArray));
+// echo json_encode($reqObj->genreArray);
+// echo  json_encode( [1,2,3]) ;
 
 
  $platforms;
@@ -28,22 +33,29 @@ $conn = new mysqli($servername, $username, $password, $dbname, $port);
 
   //Start formating all the data 
    $singleQuery= "SELECT * FROM giant_bomb_games WHERE (  ";
-   if(!(empty($_POST['platformArray']))){
-    $platforms = $_POST['platformArray'];
+   if(!empty($reqObj->platformArray)){
+    $platforms = $reqObj->platformArray;
    }
-   if(!(empty($_POST['genreArray']))){
-    $genres = $_POST['genreArray'];   
+   if(!empty($reqObj->genreArray)){
+    $genres = $reqObj->genreArray;
    }
-  if(!(empty($_POST['scoreArray']))){
-    $scores = $_POST['scoreArray'];
+  if(!empty($reqObj->scoreArray)){
+    $scores = $reqObj->scoreArray;
    }
-if(!(empty($_POST['timeArray']))){
-    $times = $_POST['timeArray'];
+if(!empty($reqObj->timeArray)){
+    $times = $reqObj->timeArray;
    }
-if(!(empty($_POST['yearArray']))){
-    $years = $_POST['yearArray'];
+if(!empty($reqObj->yearArray)){
+    $years = $reqObj->yearArray;
   }
-
+// $scores =[
+//   "70 79",
+//   "80 89",
+//   "90 100",
+//   "70 79",
+//   "80 89",
+//   "90 100"
+// ];
 
 
 if(empty($platforms) && empty($genres) && empty($scores) && empty($years) && empty($times)){
@@ -248,7 +260,7 @@ if(!empty($times)){
 
 // echo "Done constructing query! \n\n";
 $singleQuery.= " ) ORDER BY RAND() LIMIT 1";
- //echo  $singleQuery . "\n\n";
+//  echo  $singleQuery . "\n\n";
 /* Run the query ****************************/
 $filterResult = $conn-> query($singleQuery);
 $chosenID;

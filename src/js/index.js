@@ -1,8 +1,8 @@
 import "../sass/main-style.scss";
 import "intersection-observer";
+import "./gatherUserSelections.js";
 let counter = 0;
-document.addEventListener("DOMContentLoaded", function (event) {
-  // Your code to run since DOM is loaded and ready
+document.addEventListener("DOMContentLoaded", function () {
   createObserver();
 });
 
@@ -21,13 +21,11 @@ function createObserver() {
 }
 
 function handleIntersect(entries, observer) {
-  // const cmd = document.getElementsByClassName("typing")[0];
   entries.forEach((entry) => {
     if (entry.intersectionRatio > 0.5) {
       /*Add animation class */
       const { target } = entry;
       counter ? target.classList.add("fadeLeft") : target.classList.add("fadeRight");
-      // Only happens once
       observer.unobserve(target);
       counter++;
     }
