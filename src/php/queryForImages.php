@@ -1,11 +1,6 @@
 <?php
    header('Access-Control-Allow-Origin: *');
   $servername = "localhost";
-  /* For online hosting
-  $username = "ethanny2_root";
-  $password = "DIAMONDjozu17";
-  $dbname  = "ethanny2_game_database";
-  */
   /*For local testing */
   $username = "root";
   $password = "";

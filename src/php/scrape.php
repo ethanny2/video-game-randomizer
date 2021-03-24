@@ -1,5 +1,7 @@
 <?php
-	header('Access-Control-Allow-Origin: *');
+	  header('Access-Control-Allow-Origin: *');
+		header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+		header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, X-Requested-With");
 
 	/* See if the data is correctly sent*/
 	//echo($_POST['name']);
@@ -14,7 +16,10 @@
 
 	/* Replace space instances with %20*/
 	$urlBase = 'https://www.emuparadise.me/roms/search.php?query=';
-	$searchUrl = $urlBase . $_POST['name'];
+	// $searchUrl = $urlBase . $_POST['name'];
+	$json = file_get_contents('php://input');
+	$gameName = json_decode($json)->name;
+	$searchUrl = $urlBase . $gameName;
 	//$searchUrl = $urlBase . 'Xenosaga';
 	//$filteredUrl = filter_var($searchUrl,FILTER_SANITIZE_URL);
 	$filteredUrl = str_replace(" ", "%20", $searchUrl);

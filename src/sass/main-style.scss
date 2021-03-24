@@ -220,6 +220,7 @@ section {
   -webkit-box-orient: vertical;
   overflow: hidden;
   &--sm {
+    -webkit-line-clamp: 1;
   }
   &--md {
     -webkit-line-clamp: 3;
@@ -278,7 +279,7 @@ section {
   align-items: center;
   flex-direction: column;
   .game {
-    width:100%;
+    width: 100%;
     p {
       width: 100%;
     }
@@ -300,6 +301,20 @@ section {
       justify-content: center;
       align-items: center;
       flex-wrap: wrap;
+    }
+    &__links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      a {
+        width: 100%;
+        background: rgb(20, 171, 177);
+        color: white;
+        margin: 0.7rem 0;
+        display: block;
+        padding: 0.4rem;
+      }
     }
     &__imgcontainer {
       width: 75%;
@@ -326,7 +341,12 @@ section {
   margin: 1rem;
   border-radius: 3px;
 }
-
+.game__links.loading {
+  height: 8rem;
+  width: 70%;
+  margin: 1rem;
+  border-radius: 3px;
+}
 /* The loading Class */
 .loading {
   position: relative;
@@ -415,13 +435,13 @@ section {
       width: 100%;
     }
     .game {
-      p:nth-child(3) {
+      .summary {
         width: 80%;
       }
-      p:nth-child(4),
-      p:nth-child(5),
       p:nth-child(6),
-      p:nth-child(7) {
+      p:nth-child(7),
+      p:nth-child(8),
+      p:nth-child(9) {
         width: 40%;
       }
     }
@@ -464,6 +484,11 @@ section {
     font-size: 0.9rem;
   }
   #results {
+     .game__links{
+       a{
+         width:60%;
+       }
+     }
     .game {
       &__imgcontainer {
         width: 50%;
