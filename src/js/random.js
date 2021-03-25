@@ -3,6 +3,7 @@ import Packery from "packery";
 let grid;
 
 window.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM CONTENT LOADED");
   generateImages();
   let loader = document.getElementById("lds-default");
   const offset = 10;
@@ -31,6 +32,7 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 });
 async function generateImages() {
+  console.log("Calling generate images");
   var request = await fetch("http://localhost/game-randomizer-portfolio-update/src/php/queryForImages.php", {
     /* Needed for online hosting*/
     //	url: '../php/queryForImages.php',
@@ -43,16 +45,20 @@ async function generateImages() {
     }
   });
   if (request.ok) {
+    console.log("Generate images worked!");
     const data = await request.json();
-    console.log({ data });
+    console.log(data);
     if (data.length) {
       appendImages(data);
       return true;
     }
+  } else {
+    console.log("GENERATE IMAGES FAILED");
   }
 }
 
 function appendImages(links) {
+  console.log("Calling appending images!");
   const gridElem = document.getElementById("grid");
   const loader = document.getElementById("lds-default");
   const modal = document.getElementsByClassName("modal")[0];
@@ -67,7 +73,18 @@ function appendImages(links) {
   $.each(links, function (_, value) {
     if (value) {
       const gridItem = $(`<div tabindex="0"></div>`);
-      const image = $("<img src=" + value.cover + " />");
+      const image = new Image();
+      image.onload = function () {
+        console.log("IMAGE LOADED");
+        if (loader.style.display !== "none") loader.style.display = "none";
+        //Send it into the packery grid.
+        $(".first_page #grid").append(gridItem);
+        grid.appended(gridItem);
+        grid.layout();
+      };
+      image.src = value.cover;
+      image.alt = value.name;
+      // const image = $(`<img alt="${value.name}" src="${value.cover}" />`);
       gridItem.addClass("grid-item");
       gridItem.append(image);
       gridItem.on("click", (e) => {
@@ -77,7 +94,7 @@ function appendImages(links) {
           $(".modal").addClass("fade-in");
           $("section").addClass("unfocus");
           $(modal).html(`
-        <h1 class="cutoff cutoff--sm">${value.name}</h1>
+        <p class="cutoff cutoff--sm title">${value.name}</p>
         <div class="modal__contents">
           <div class="modal__image">
             <img src="${value.cover}" alt="${value.name}" />
@@ -101,13 +118,14 @@ function appendImages(links) {
           return false;
         }
       });
-      image.on("load", () => {
-        if (loader.style.display !== "none") loader.style.display = "none";
-        //Send it into the packery grid.
-        $(".first_page #grid").append(gridItem);
-        grid.appended(gridItem);
-        grid.layout();
-      });
+      // image.on("load", () => {
+      //   console.log("IMAGE LOADED");
+      //   if (loader.style.display !== "none") loader.style.display = "none";
+      //   //Send it into the packery grid.
+      //   $(".first_page #grid").append(gridItem);
+      //   grid.appended(gridItem);
+      //   grid.layout();
+      // });
     }
   });
 }

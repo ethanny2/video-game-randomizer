@@ -73,6 +73,9 @@ section {
   text-align: center;
   opacity: 0;
   transition: opacity 0.2s ease, z-index 0.2s ease;
+  .title{
+    font-size:1.4rem;
+  }
   p,
   a {
     font-size: 0.8rem;

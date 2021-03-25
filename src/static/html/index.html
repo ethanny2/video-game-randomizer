@@ -16,34 +16,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <div id="lds-default">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
     <main>
       <section id="hero">
         <h1>Video Game Randomizer</h1>
-        <h5>Find your game</h5>
+        <h2>Find your game</h2>
         <div class="wrapper"><img class="simon" src="../images/simon-sprite.gif" alt="Simon Belmont Sprite" /></div>
         <div class="wrapper"><img class="megaman" src="../images/megaman-sprite.gif" alt="Megaman Sprite" /></div>
         <div class="wrapper">
-          <img class="rayman" src="../images/rayman-transparent-sprite.gif" alt="Rayman Sprite" />
+          <img class="rayman" src="../images/rayman-sprite.gif" alt="Rayman Sprite" />
         </div>
       </section>
       <section class="slice slice1">
         <h2>30,000+ games</h2>
         <div>
-          <img src="../images/controller.png" alt="Game controller" />
+          <picture>
+            <source srcset="../images/controller.webp" type="image/webp">
+            <source srcset="../images/controller.png" type="image/png"> 
+            <img src="../images/controller.png" alt="Game controller" />
+          </picture>
         </div>
         <p>
           A database of all video games from 1970 - 2016. Games released in the last decade have additional information
@@ -52,42 +42,51 @@
         <ul>
           <li>
             Aggregate review score with data from
-            <a rel="nooopener" target="_blank" href="https://www.metacritic.com/">Metacritic</a>
+            <a rel="noopener" target="_blank" href="https://www.metacritic.com/">Metacritic</a>
           </li>
           <li>
             Stats on how long it takes to complete a game from
-            <a rel="nooopener" target="_blank" href="https://howlongtobeat.com/">HTLB</a>
+            <a rel="noopener" target="_blank" href="https://howlongtobeat.com/">HTLB</a>
           </li>
-          <!-- <li>Games from obscure consoles like the Amiga, Sharp X68000, arcade machines and more</li> -->
         </ul>
       </section>
       <section>
         <h2>Filter anything</h2>
         <div>
-          <img src="../images/filter.png" alt="Filter" />
+          <picture>
+            <source srcset="../images/filter.webp" type="image/webp">
+            <source srcset="../images/filter.png" type="image/png"> 
+            <img src="../images/filter.png" alt="Filter" />
+          </picture>
         </div>
         <p>
           Specify your filters to get a random game you've never heard of before. Filters include platforms, genre,
           release year, average time to beat and average rating.
+          <p class="bold">* Searching with no filters gives a 100% random game!</p>
         </p>
       </section>
       <section class="slice slice2">
         <h2>Find that hidden gem</h2>
         <div>
-          <img src="../images/link.png" alt="Link with accent lines" />
+        
+          <picture>
+            <source srcset="../images/link.webp" type="image/webp">
+            <source srcset="../images/link.png" type="image/png"> 
+            <img src="../images/link.png" alt="Link with accent lines" />
+          </picture>
         </div>
         <p>
           Results for your randomly choosen game come with links to purchase that game; or links to find that game if it
           is out of print.
         </p>
         <p>
-          Or... use the <a rel="nooopener" target="_blank" href="/random.html">cover art browser</a> to randomly find
+          Or... use the <a rel="noopener" target="_blank" href="/random.html">cover art browser</a> to randomly find
           something you like!
         </p>
       </section>
       <section class="filters">
         <div class="container">
-          <h2>Platforms</h2>
+          <h3>Platforms</h3>
           <div class="checkbox-list platform">
             <label for="PC"> <input type="checkbox" id="PC" /> PC</label>
             <label for="Nintendo NX (working title)">
@@ -130,7 +129,7 @@
             <label for="PlayStation Network (PS3)">
               <input type="checkbox" id="PlayStation Network (PS3)" /> PlayStation Network (PS3)</label
             >
-            <label for="HyperScan"> <input type="checkbox" id="HyperScan" HyperScan /> </label>
+            <label for="HyperScan"> <input type="checkbox" id="HyperScan" /> HyperScan</label>
             <label for="Xbox 360 Games Store">
               <input type="checkbox" id="Xbox 360 Games Store" /> Xbox 360 Games Store</label
             >
@@ -305,7 +304,7 @@
           </div>
         </div>
         <div class="container">
-          <h2>Genres</h2>
+          <h3>Genres</h3>
           <div class="checkbox-list genre">
             <label for="Action"><input type="checkbox" id="Action" /> Action</label>
             <label for="Strategy"><input type="checkbox" id="Strategy" /> Strategy</label>
@@ -369,7 +368,7 @@
         </div>
 
         <div class="container">
-          <h2>Release Year</h2>
+          <h3>Release Year</h3>
 
           <div class="checkbox-list date">
             <label for="blank"><input type="checkbox" id="blank" /> No release data</label>
@@ -457,7 +456,7 @@
         </div>
 
         <div class="container half">
-          <h2>Time to Beat</h2>
+          <h3>Time to Beat</h3>
           <div class="checkbox-list time">
             <label for="--"><input type="checkbox" id="--" /> No time</label>
             <label for="1 9"><input type="checkbox" id="1 9" /> 1 - 9 Hours</label>
@@ -475,9 +474,9 @@
         </div>
 
         <div class="container half">
-          <h2>Average Score</h2>
+          <h3>Average Score</h3>
           <div class="checkbox-list score">
-            <label for="1% 9%"><input type="checkbox" id="blank" /> No rating</label>
+            <label for="blank_rating"><input type="checkbox" id="blank_rating" /> No rating</label>
             <label for="1% 9%"><input type="checkbox" id="1% 9%" /> 1% - 9%</label>
             <label for="10% 19%"><input type="checkbox" id="10% 19%" /> 10% - 19%</label>
             <label for="20% 29%"><input type="checkbox" id="20% 29%" /> 20% - 29%</label>

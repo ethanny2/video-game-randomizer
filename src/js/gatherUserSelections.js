@@ -50,11 +50,13 @@ function gatherButtonValues() {
   $.each(scoreButtons, function (_, value) {
     var tempJQ = $(value);
     var tempId = tempJQ.attr("id");
-    if (tempId !== "blank") {
+    if (tempId !== "blank_rating") {
       //looks like 10% 19% remove percent signs
       tempId = tempId.replace(/%/g, "");
+    } else {
+      tempId = tempId.replace(/rating/g, "");
     }
-
+    console.log({ tempId });
     if (!tempJQ.is(":hidden") && tempJQ.prop("checked")) {
       selectedScores.push(tempId);
     }
@@ -82,13 +84,11 @@ function gatherButtonValues() {
     timeArray: selectedTimes,
     yearArray: selectedYears
   };
-
   console.log(data);
   sendSelectedData(data);
 }
 
 $(".run_button").on("click", function () {
-  console.log("RUN BUTTON PRESSED");
   document.getElementsByClassName("game")[0].innerHTML = `
   <div class="game__title loading"></div>
   <div class="game__imgcontainer loading"></div>
@@ -98,7 +98,6 @@ $(".run_button").on("click", function () {
 $(".clear_button").on("click", uncheckInputs);
 
 async function sendSelectedData(data) {
-  console.log({ data });
   let request = await fetch("http://localhost/game-randomizer-portfolio-update/src/php/queryDatabase.php", {
     /* For web*/
     //url: '../php/queryDatabase.php',
@@ -120,16 +119,16 @@ async function sendSelectedData(data) {
     console.log({ formattedResponse });
     if (!formattedResponse.Sorry) {
       console.log("Game found! displaying...");
-      const contents = `<h1 class="game__title">${formattedResponse.name}</h1>
-      <h3 class="game__rating"><span class="bold">Rating: </span> ${
+      const contents = `<h4 class="game__title">${formattedResponse.name}</h4>
+      <h5 class="game__rating"><span class="bold">Rating: </span> ${
         formattedResponse.rating ? formattedResponse.rating : "N/A"
-      }</h3>
+      }</h5>
       <div class="game__content">
         <div class="game__imgcontainer">
           <img src="${formattedResponse.cover}" alt="${formattedResponse.name} box art" />
         </div>
         <p class="release"><span class="bold">Release Date:</span> ${formattedResponse.releaseDate}</p>
-        <h3>Links</h3>
+        <h5>Links</h5>
         <div class="game__links loading"></div>
         <p class="summary">
           <span class="bold"> Summary: </span> ${formattedResponse.summary}

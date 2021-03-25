@@ -1,32 +1,25 @@
 const Jimp = require("jimp");
 const fs = require("fs");
 const path = require("path");
-const covers = path.join(__dirname, "src/static/images/covers");
-const designs = path.join(__dirname, "src/static/images/designs");
-const posts = path.join(__dirname, "src/static/images/posts");
-const moveToCovers = path.join(__dirname, "src/static/images/resizedCovers");
-const moveToDesigns = path.join(__dirname, "src/static/images/resizedDesigns");
-const moveToPosts = path.join(__dirname, "src/static/images/resizedPosts");
+const images = path.resolve(__dirname, "src/static/images/sprites");
+const moveToSprites = path.resolve(__dirname, "src/static/images/reSizedsprites/");
+
 async function resize(imageType, imageUrl, fileName) {
   let width;
   let height;
   switch (imageType) {
-    case "covers":
-      (width = 300), (height = Jimp.AUTO);
-      break;
-    case "designs":
-      (width = 300), (height = Jimp.AUTO);
-      break;
-    case "posts":
-      (width = 300), (height = Jimp.AUTO);
+    case "sprites":
+      (width = 64), (height = 64);
       break;
     default:
       break;
   }
   const image = await Jimp.read(imageUrl);
-  const outputPath = path.join(moveToCovers, fileName);
+  const outputPath = path.join(moveToSprites, fileName);
+  console.log({ outputPath });
+
   await image.resize(width, height);
-  await image.writeAsync(outputPath);
+  await image.write(outputPath);
 }
 
 // resize("cover", path.join(__dirname, "src/static/images/covers/2door.jpg"), "2door");
@@ -41,10 +34,10 @@ async function resizeDirectory(folderPath, imageType) {
     for (const file of files) {
       // Get the full paths
       const fromPath = path.join(folderPath, file);
-      const toPath = path.join(moveToCovers, file);
       // Stat the file to see if we have a file or dir
       const stat = await fs.promises.stat(fromPath);
-
+      // const imageUrl = path.join(fromPath, file);
+      console.log({ file });
       if (stat.isFile()) {
         await resize(imageType, fromPath, file);
         console.log("'%s' done resizing.", fromPath);
@@ -64,4 +57,4 @@ async function resizeDirectory(folderPath, imageType) {
   }
 }
 
-resizeDirectory(covers, "covers");
+resizeDirectory(images, "sprites");
