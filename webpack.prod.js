@@ -2,7 +2,6 @@ const { merge } = require("webpack-merge");
 const common = require("./webpack.common.js");
 const TerserPlugin = require("terser-webpack-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
 const CompressionPlugin = require("compression-webpack-plugin");
 const glob = require("glob");
@@ -31,18 +30,6 @@ module.exports = merge(common, {
         test: /\.(jpg|JPG|jpeg|png|gif|mp4|svg|ttf|webp|woff2|woff|eot|webmanifest)$/i,
         type: "asset/resource"
       },
-      // Loads all font files
-      // {
-      //   test: /\.(woff|woff2|eot|ttf|otf)$/i,
-      //   use: {
-      //     loader: "file-loader",
-      //     options: {
-      //       outputPath: "fonts/",
-      //       name: "[name].[contenthash].[ext]",
-      //       esModule: false
-      //     }
-      //   }
-      // }
       {
         test: /\.(html)$/,
         use: {
@@ -50,21 +37,12 @@ module.exports = merge(common, {
           options: {
             minimize: true,
             esModule: false
-            // root: path.resolve(__dirname, "dist")
           }
         }
       }
     ]
   },
   plugins: [
-    // new MiniCssExtractPlugin({
-    //   filename: "css/style.[contenthash].css",
-    //   chunkFilename: "css/style.[contenthash].css"
-    // }),
-    // new MiniCssExtractPlugin({
-    //   filename: "[name].[contenthash].css"
-    //   // chunkFilename: "[id].css"
-    // }),
     new CompressionPlugin({
       test: /\.(html|css|js)(\?.*)?$/i
     }),
@@ -73,22 +51,9 @@ module.exports = merge(common, {
     }),
     new ImageMinimizerPlugin({
       minimizerOptions: {
-        // Lossless optimization with custom option
-        // Feel free to experiment with options for better result for you
         plugins: [
-          // ["gifsicle", { interlaced: true }],
           ["jpegtran", { progressive: true }],
           ["optipng", { optimizationLevel: 2 }]
-          // [
-          //   "svgo",
-          //   {
-          //     plugins: [
-          //       {
-          //         removeViewBox: false
-          //       }
-          //     ]
-          //   }
-          // ]
         ]
       }
     }),

@@ -44,12 +44,6 @@ async function resizeDirectory(folderPath, imageType) {
       } else if (stat.isDirectory()) {
         console.log("'%s' is a directory.", fromPath);
       }
-
-      // Now move async
-      // await fs.promises.rename(fromPath, toPath);
-
-      // Log because we're crazy
-      // console.log("Moved '%s'->'%s'", fromPath, toPath);
     } // End for...of
   } catch (e) {
     // Catch anything bad that happens

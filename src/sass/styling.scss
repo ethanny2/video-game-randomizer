@@ -15,14 +15,16 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%239269d4' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
 }
 
-
 section {
-  text-align:center;
-  h1{
+  text-align: center;
+  h1,
+  h2 {
     font-family: "Press Start 2P", sans-serif, cursive;
   }
+  h2 {
+    font-size: 0.8rem;
+  }
   width: 100%;
-  // border: solid black 1px;
   display: table;
   margin: 0;
   max-width: 100%;
@@ -68,13 +70,15 @@ section {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 1.5rem;
+  padding: 0.8rem;
   font-size: 2rem;
   text-align: center;
   opacity: 0;
   transition: opacity 0.2s ease, z-index 0.2s ease;
-  .title{
-    font-size:1.4rem;
+  .title {
+    font-size: 1.4rem;
+    margin-top: 0.3rem;
+    margin-bottom: 0.5rem;
   }
   p,
   a {
@@ -113,7 +117,7 @@ section {
   img {
     width: 100%;
     object-fit: fill;
-    max-height: 100%;
+    max-height: 10rem;
   }
 }
 .modal:before {
@@ -298,6 +302,9 @@ section {
 
 @media only screen and (min-width: 768px) {
   .modal {
+    img {
+      max-height: 17rem;
+    }
     h1,
     h2 {
       margin: 0.4rem 0;
@@ -313,7 +320,6 @@ section {
       flex: 1 1 100%;
     }
     &__image {
-      flex: 1 1 100%;
       width: 50%;
     }
     &__contents {
@@ -342,8 +348,8 @@ section {
   .modal {
     width: 70%;
     &__image {
-      flex: 1 1 60%;
-      width: 60%;
+      flex: 1 1 50%;
+      width: 50%;
     }
     &__contents {
       display: flex;
@@ -362,6 +368,6 @@ section {
 
 @media only screen and (min-width: 1080px) {
   .modal {
-    width: 50%;
+    width: 70%;
   }
 }

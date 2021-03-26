@@ -2,20 +2,14 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const PreloadWebpackPlugin = require("preload-webpack-plugin");
 const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
+const webpack = require("webpack");
 const index = path.resolve(__dirname, "./src/js/index.js");
 const random = path.resolve(__dirname, "./src/js/random.js");
 const nodePath = path.resolve(__dirname, "node_modules");
 
-const webpack = require("webpack");
-
 module.exports = {
   target: "web",
-  // node: {
-  //   fs: "empty"
-  // },
   resolve: {
     fallback: {
       fs: false
@@ -35,29 +29,14 @@ module.exports = {
   },
   output: {
     filename: "js/[name].bundle.js",
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, "dist")
   },
   module: {
     rules: [
       {
-        test: /\.(jpg|JPG|jpeg|png|gif|mp3|svg|ttf|webp|woff2|woff|eot)$/i,
-        type: 'asset/resource'
+        test: /\.(jpg|JPG|jpeg|png|gif|mp3|svg|ttf|webp|woff2|woff|eot|webmanifest)$/i,
+        type: "asset/resource"
       },
-      // {
-      //   test: /\.(jpg|JPG|jpeg|png|gif|mp3|svg|ttf|webp|woff2|woff|eot)$/i,
-      //   use: [
-      //     {
-      //       loader: "file-loader",
-      //       options: {
-      //         outputPath: "images/",
-      //         name: "[name].[ext]",
-      //         // name: "[name].[contenthash].[ext]",
-      //         esModule: false
-      //       }
-      //     }
-      //   ]
-      // },
-      // Targets all .js files
       {
         test: /\.m?js$/i,
         exclude: nodePath,
@@ -85,12 +64,7 @@ module.exports = {
         test: /\.(sa|sc|c)ss$/i,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              // Path all assets AFTER build process
-              // publicPath: ""
-              // hmr: true
-            }
+            loader: MiniCssExtractPlugin.loader
           },
           // Translates CSS into CommonJS
           {
@@ -110,18 +84,7 @@ module.exports = {
             }
           }
         ]
-      },
-      // {
-      //   test: /\.(html)$/,
-      //   use: {
-      //     loader: "html-loader",
-      //     options: {
-      //       minimize: true,
-      //       esModule: false
-      //       // root: path.resolve(__dirname, "dist")
-      //     }
-      //   }
-      // }
+      }
     ]
   },
   plugins: [
@@ -133,7 +96,6 @@ module.exports = {
       title: "Video Game Randomizer",
       filename: "index.html",
       template: "./src/static/html/index.html",
-      favicon: "./src/static/images/favicons/game.ico",
       inject: "head",
       chunks: ["index"],
       minify: true
@@ -142,34 +104,14 @@ module.exports = {
       title: "Video Game Randomizer - Cover Art",
       filename: "random.html",
       template: "./src/static/html/random.html",
-      favicon: "./src/static/images/favicons/game.ico",
       inject: "head",
       chunks: ["random"],
       minify: true
     }),
-    //Adds rel="preload" to fonts;
-    // new PreloadWebpackPlugin({
-    //   rel: "preload",
-    //   as(entry) {
-    //     if (/\.(woff|woff2|ttf|otf)$/.test(entry)) return "font";
-    //   },
-    //   fileWhitelist: [/\.(woff|woff2|ttf|otf)$/],
-    //   //Includes all assets; even fonts loaded by file-loader
-    //   include: "allAssets"
-    // }),
     //Adds defer to js scripts to speed load times.
     new ScriptExtHtmlWebpackPlugin({
       defaultAttribute: "defer"
     }),
-    //Copy the entire directory of netlify functions to build folder
-    // new CopyPlugin({
-    //   patterns: [
-    //     {
-    //       from: path.resolve(__dirname, "./functions"),
-    //       to: "./functions/"
-    //     }
-    //   ]
-    // }),
     new MiniCssExtractPlugin({
       filename: "[name].css",
       chunkFilename: "[id].css"

@@ -1,13 +1,13 @@
 //Platform
-var selectedPlats = [];
+let selectedPlats = [];
 //Genre
-var selectedGenres = [];
+let selectedGenres = [];
 //Score
-var selectedScores = [];
+let selectedScores = [];
 //time
-var selectedTimes = [];
+let selectedTimes = [];
 //Date
-var selectedYears = [];
+let selectedYears = [];
 
 function clearData() {
   selectedPlats = [];
@@ -27,51 +27,48 @@ function uncheckInputs() {
 
 function gatherButtonValues() {
   clearData();
-  console.log("in here!!!");
-  var platformButtons = $(".checkbox-list.platform input");
-  var genreButtons = $(".checkbox-list.genre input");
-  var scoreButtons = $(".checkbox-list.score input");
-  var timeButtons = $(".checkbox-list.time input");
-  var yearButtons = $(".checkbox-list.date input");
+  let platformButtons = $(".checkbox-list.platform input");
+  let genreButtons = $(".checkbox-list.genre input");
+  let scoreButtons = $(".checkbox-list.score input");
+  let timeButtons = $(".checkbox-list.time input");
+  let yearButtons = $(".checkbox-list.date input");
   $.each(platformButtons, function (_, value) {
-    var tempJQ = $(value);
-    var tempId = tempJQ.attr("id");
+    let tempJQ = $(value);
+    let tempId = tempJQ.attr("id");
     if (!tempJQ.is(":hidden") && tempJQ.prop("checked")) {
       selectedPlats.push(tempId);
     }
   });
   $.each(genreButtons, function (_, value) {
-    var tempJQ = $(value);
-    var tempId = tempJQ.attr("id");
+    let tempJQ = $(value);
+    let tempId = tempJQ.attr("id");
     if (!tempJQ.is(":hidden") && tempJQ.prop("checked")) {
       selectedGenres.push(tempId);
     }
   });
   $.each(scoreButtons, function (_, value) {
-    var tempJQ = $(value);
-    var tempId = tempJQ.attr("id");
+    let tempJQ = $(value);
+    let tempId = tempJQ.attr("id");
     if (tempId !== "blank_rating") {
       //looks like 10% 19% remove percent signs
       tempId = tempId.replace(/%/g, "");
     } else {
       tempId = tempId.replace(/rating/g, "");
     }
-    console.log({ tempId });
     if (!tempJQ.is(":hidden") && tempJQ.prop("checked")) {
       selectedScores.push(tempId);
     }
   });
   $.each(timeButtons, function (_, value) {
-    var tempJQ = $(value);
-    var tempId = tempJQ.attr("id");
+    let tempJQ = $(value);
+    let tempId = tempJQ.attr("id");
     if (!tempJQ.is(":hidden") && tempJQ.prop("checked")) {
       selectedTimes.push(tempId);
     }
-    //	console.log(selectedTimes);
   });
   $.each(yearButtons, function (_, value) {
-    var tempJQ = $(value);
-    var tempId = tempJQ.attr("id");
+    let tempJQ = $(value);
+    let tempId = tempJQ.attr("id");
     if (!tempJQ.is(":hidden") && tempJQ.prop("checked")) {
       selectedYears.push(tempId);
     }
@@ -84,7 +81,6 @@ function gatherButtonValues() {
     timeArray: selectedTimes,
     yearArray: selectedYears
   };
-  console.log(data);
   sendSelectedData(data);
 }
 
@@ -98,11 +94,7 @@ $(".run_button").on("click", function () {
 $(".clear_button").on("click", uncheckInputs);
 
 async function sendSelectedData(data) {
-  let request = await fetch("http://localhost/game-randomizer-portfolio-update/src/php/queryDatabase.php", {
-    /* For web*/
-    //url: '../php/queryDatabase.php',
-    /* For local testing*/
-    // url: "http://localhost/Video Game Randomizer Ver 2.0/php/queryDatabase.php",
+  let request = await fetch("https://boiling-inlet-32336.herokuapp.com/query", {
     method: "POST",
     body: JSON.stringify(data),
     headers: {
@@ -110,15 +102,12 @@ async function sendSelectedData(data) {
     }
   });
   if (!request.ok) {
-    console.log(`Error with fetch request ${request.statusText}`);
     return;
   } else {
     const container = document.getElementsByClassName("game")[0];
-    var formattedResponse = await request.json();
+    let formattedResponse = await request.json();
     container.innerHTML = "";
-    console.log({ formattedResponse });
     if (!formattedResponse.Sorry) {
-      console.log("Game found! displaying...");
       const contents = `<h4 class="game__title">${formattedResponse.name}</h4>
       <h5 class="game__rating"><span class="bold">Rating: </span> ${
         formattedResponse.rating ? formattedResponse.rating : "N/A"
@@ -154,17 +143,14 @@ function isValid(str) {
   return !/[~`!#$%^&*+=\-[\]\\;,/{}|\\":<>?]/g.test(str);
 }
 
-/* TBD function to call ajax to php to get link data*/
-async function scrapeEmuparadise(gameName, imageLink) {
+async function scrapeEmuparadise(gameName) {
   const container = document.getElementsByClassName("game__links")[0];
-  /* This calls create slider later*/
-  console.log("Calling scrape emu function with gameName " + gameName);
   if (!isValid(gameName)) {
     container.classList.remove("loading");
     container.innerHTML = "<h4>No game links found.</h4>";
     return;
   }
-  const response = await fetch("http://localhost/game-randomizer-portfolio-update/src/php/scrape.php", {
+  const response = await fetch("https://boiling-inlet-32336.herokuapp.com/scrape", {
     method: "POST",
     body: JSON.stringify({ name: gameName }),
     headers: {
@@ -172,13 +158,10 @@ async function scrapeEmuparadise(gameName, imageLink) {
     }
   });
   if (!response.ok) {
-    console.log(`Error getting game links with status ${response.statusText}`);
     return { error: response.statusText };
   } else {
     const data = await response.json();
     if (data !== "nil") {
-      console.log({ data });
-      console.log("Found emuparadise links!");
       container.classList.remove("loading");
       data.forEach((result) => {
         container.innerHTML += `<a rel="noopener" target="_blank"  href="${result.link}">${result.name}</a>`;

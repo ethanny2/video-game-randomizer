@@ -1,6 +1,6 @@
 import "../sass/main-style.scss";
 import "intersection-observer";
-import "./gatherUserSelections.js";
+import "./query.js";
 let counter = 0;
 document.addEventListener("DOMContentLoaded", function () {
   createObserver();
