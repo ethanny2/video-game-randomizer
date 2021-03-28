@@ -1,43 +1,124 @@
-![Issues](https://img.shields.io/github/issues/ethanny2/webpack-lighthouse100-template) ![forks](https://img.shields.io/github/forks/ethanny2/webpack-lighthouse100-template) ![Stars](https://img.shields.io/github/stars/ethanny2/webpack-lighthouse100-template)  ![License](https://img.shields.io/github/license/ethanny2/webpack-lighthouse100-template) [![Twitter Badge](https://img.shields.io/badge/chat-twitter-blue.svg)](https://twitter.com/ArrayLikeObj)
 
-# Webpack Lighthouse 100 Template
+[![GitHub license](https://img.shields.io/github/license/ethanny2/retro-fansite-update)](https://github.com/ethanny2/retro-fansite-update)[![GitHub stars](https://img.shields.io/github/stars/ethanny2/retro-fansite-update)](https://github.com/ethanny2/retro-fansite-update/stargazers)[![GitHub forks](https://img.shields.io/github/forks/ethanny2/retro-fansite-update)](https://github.com/ethanny2/retro-fansite-update/network)[![Twitter Badge](https://img.shields.io/badge/chat-twitter-blue.svg)](https://twitter.com/ArrayLikeObj)
+
+# Video Game Randomizer Front End
+
+## [https://game-randomizer.netlify.app/](https://game-randomizer.netlify.app/)
 
 
 <p align="center">
-
-<img src="https://media4.giphy.com/media/AZQvjAAkSmkYCkNaJM/giphy.gif" alt="Gif of lighthouse perfect 100 fireworks" />
-
+  <img  src="https://media4.giphy.com/media/naqqBuUaeqLW8P3A5E/giphy.gif" alt="Demo gif">
 </p>
 
-##[Try it your self!](https://static-lighthouse100.netlify.app/)
- A template that utilizes the webpack (4) bundler along with its robust plugin environment to make a template that is optimized for best practices in a production environment.
+## Background
 
-***Note: Most of the rules in the webpack files have breif comments explaining them but if you want a more in-depth explaination of any of the more intracate details please see the README of this [Repo](https://github.com/ethanny2/threejs-es6-webpack-barebones-boilerplate) (Essentially this template uses the same config as the linked repo, the only difference is the other repo just uses Threejs. The explanations for the webpack rules should still apply).**
+The original concept for the site, as instructed by a client, was to make a site for them to promote their music. Later that agreement fell through but since I had already made the site I just replaced the subject matter with a trending artist at the time. 
 
- ## Features
+This site is meant to have an old-school grungy aesthetic with the use of a non-traditional background , animated transparent gifs and other florishes. Similar to the website style of the popular fasion brand [AWGE](https://www.awge.com/home).
+
+**Goals (for rehosting site)** : 
+   - Optimize the bundle size and lighthouse scores
+   - Modernize the design
+   - Improve the UI/UX for the filters while still keeping the granularity
+
+## Technology used
+- SCSS
+- webpack 5 
+- jQuery 
+- [Packery.js library](https://packery.metafizzy.co/)
+- CSS clip path design + loading skeleton animations
+- Intersection Observer
+- image optimizations with webp + fallbacks
+- Infinite scroll on random cover art browser with lodash ```throttle()```
   
-- ### Minification 
-  - All HTML, CSS/SCSS, and JS files
-- ### Dev Environment with Hot Module Reloading 
-  - Works for HTML,CSS/SCSS, JS files
-  - Ability to serve your static site over a local network (see command start-mobile-dev) to view on different real devices
-- ### PurgeCSS 
-  - To detect and remove unused CSS (essential when using styling libraries like Boostrap)
-- ### Autoprefixer
-  -  To automatically include vendor prefixes for CSS properties
-- ### Cache Bursting
-  -  A technique  used to invalidate old versions of the site when re-building
-- ### All Static Assets in Webpack Dependency Graph
-  - Import images, auido and CSS/SCSS/SASS files directly into your JavaScript as variables
-- ### Image Compression
-  - Uses ImageminPlugin to compress images used automatically
-- ### Compression of all other static files
-  - Gzip compression of all assets for faster speeds over the wire
-- ### Chunking Strategy optimized for HTTPS/2 connections
-  - [Source 1](https://medium.com/hackernoon/the-100-correct-way-to-split-your-chunks-with-webpack-f8a9df5b7758) 
-  - [Source 2](https://calendar.perfplanet.com/2019/bundling-javascript-for-performance-best-practices/)
+## Concepts
 
-- ### Support for Netlify Serverless Functions 
-  - Set up with the CopyWebpack plugin; also included is a netlify.toml if you are using the Netlify CLI
+### Packery.js for Cover Art Browser
+
+Implemented Packery.js to create a jagged (images do not have equal heights or widths) grid of randomly selected video game cover art. When a cover is clicked a modal with more details on that game is displayed. 
+
+Additionally added in an infinite scroll so more content can be loaded without refreshing the page. On mobile devices this fired too many times in a row so I used lodash to throttle() the function so it is only allowed to be executed every 1.5s.
+
+```
+  grid = new Packery(gridElem, {
+    columnWidth: ".grid-sizer",
+    itemSelector: ".grid-item",
+    percentPosition: true,
+    resize: true,
+    initLayout: true
+  });
+  $.each(links, function (_, value) {
+    if (value) {
+      const gridItem = $(`<div tabindex="0"></div>`);
+      const image = new Image();
+      image.onload = function () {
+        if (loader.style.display !== "none") loader.style.display = "none";
+        //Send it into the packery grid.
+        $(".first_page #grid").append(gridItem);
+        grid.appended(gridItem);
+        grid.layout();
+      };
+      image.src = value.cover;
+      image.alt = value.name;
+      gridItem.addClass("grid-item");
+      gridItem.append(image);
+      ...
+      ...
+```
+
+### Intersection Observer Animations
+
+When a specific element is scrolled into the viewport it triggers a fade/slide in animation on my divs shaped with the CSS clip-path property.
+
+```
+let counter = 0;
+function handleIntersect(entries, observer) {
+  entries.forEach((entry) => {
+    if (entry.intersectionRatio > 0.5) {
+      /*Add animation class */
+      const { target } = entry;
+      counter ? target.classList.add("fadeLeft") : target.classList.add("fadeRight");
+      observer.unobserve(target);
+      counter++;
+    }
+  });
+}
+
+```
+
+### Creating the Filter/Checkbox UI
+
+Revisiting this site and trying to decide how to layout all the different filter options/possibilities was most likely the biggest challenge. Previouly these checkboxes were located in a nav/modal the where user could access filters one page/ category at a time. 
+
+After researching this UI/UX issue I came across a [Medium Article from a software engineer working for a Travel site](https://medium.com/tripaneer-techblog/improving-the-usability-of-multi-selecting-from-a-long-list-63e1a67aab35) who had the same issue of finding a intuitive layout for a filter with many options. The article details the A/B testing of user engagement which comes to the conclusion that just laying out the options as checkboxes in their own section with the CSS property ```column-count: 2 (or 3)``` yielded an interface that more users engaged.
+
+
+
+### webpack 5 bundling
+
+Using my own custom webpack 5 dev and production configuration to have a local dev-server with [hot module replacement](https://webpack.js.org/concepts/hot-module-replacement/) and optimizied production build with minification, auto-prefixing for CSS properties and more. The upgrade from webpack 4 -> webpack 5 makes bundling static assets  (images, json files etc...) very easy.
+```
+/* loads nearly all assets; no external plugins */
+{
+        test: /\.(jpg|JPG|jpeg|png|gif|mp3|svg|ttf|webp|woff2|woff|eot)$/i,
+        type: "asset/resource"
+},
+```
+
+
+### webp images with fallback
+
+Running a script as a pre-build step convert all png/jpg files to webp versions to cut back on bundle sizes for browsers that do support webp images.
+```
+(async () => {
+  const img = await imagemin([path.resolve(__dirname, "src/static/images/*.{jpg,png}").replace(/\\/g, "/")], {
+    destination: path.resolve(__dirname, "src/static/images/").replace(/\\/g, "/"),
+    plugins: [imageminWebp({ quality: 70 })]
+  });
+  console.log(img);
+  console.log("Done converting images");
+})();
+
+```
 
 
