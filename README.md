@@ -12,9 +12,12 @@
 
 ## Background
 
-The original concept for the site, as instructed by a client, was to make a site for them to promote their music. Later that agreement fell through but since I had already made the site I just replaced the subject matter with a trending artist at the time. 
+The concept for this site was to give video game players/fans the ability to programatically search/filter through a comprehensive game database.
 
-This site is meant to have an old-school grungy aesthetic with the use of a non-traditional background , animated transparent gifs and other florishes. Similar to the website style of the popular fasion brand [AWGE](https://www.awge.com/home).
+### *How does this differ from any other video game information REST  API project?*
+ The mysql database powering the site was built by compiling information through multiple video game data APIs (Giant Bomb , IGBD) and web scraping (How long to beat, MetaCritic). In addition, unlike similar sites/ APIs this includes **nearly all released video games from around 1980 - 2015**.
+
+
 
 **Goals (for rehosting site)** : 
    - Optimize the bundle size and lighthouse scores
